@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
+    }
     productFlavors {
     }
 }
@@ -28,5 +32,10 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     testCompile 'junit:junit:4.12'
 }
