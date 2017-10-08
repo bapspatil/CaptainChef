@@ -5,6 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
+import bapspatil.captainchef.data.FoodItem;
+
 /**
  * Created by bapspatil
  */
@@ -12,9 +16,11 @@ import android.view.ViewGroup;
 public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItemsRecyclerViewAdapter.FoodItemsViewHolder> {
 
     private Context mContext;
+    private ArrayList<FoodItem> mFoodItemsList;
 
-    public FoodItemsRecyclerViewAdapter() {
-        super();
+    public FoodItemsRecyclerViewAdapter(Context context, ArrayList<FoodItem> foodItemsList) {
+        this.mContext = context;
+        this.mFoodItemsList = foodItemsList;
     }
 
     @Override
@@ -29,7 +35,7 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mFoodItemsList.size();
     }
 
     public class FoodItemsViewHolder extends RecyclerView.ViewHolder {
