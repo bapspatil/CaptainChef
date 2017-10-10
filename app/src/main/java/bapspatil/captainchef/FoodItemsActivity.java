@@ -43,7 +43,7 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
     public String loadMainJson() {
         String json;
         try {
-            InputStream is = getResources().getAssets().open("baking.json");
+            InputStream is = getApplicationContext().getResources().openRawResource(R.raw.baking);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
