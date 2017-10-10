@@ -53,7 +53,7 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
         return mFoodItemsList.size();
     }
 
-    public class FoodItemsViewHolder extends RecyclerView.ViewHolder {
+    class FoodItemsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.food_item_tv) TextView mFoodItemTextView;
         @BindView(R.id.food_item_iv) ImageView mFoodItemImageView;
 
