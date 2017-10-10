@@ -1,5 +1,6 @@
 package bapspatil.captainchef;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -24,7 +25,7 @@ import bapspatil.captainchef.data.RecipeStep;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FoodItemsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
+public class FoodItemsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>, FoodItemsRecyclerViewAdapter.OnFoodItemClickListener {
     private ArrayList<FoodItem> foodItemsList = new ArrayList<>();
     private static final int FOOD_ITEMS_LOADER_ID = 13;
     @BindView(R.id.food_items_rv) RecyclerView mFoodItemsRecyclerView;
@@ -33,13 +34,12 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food_items);
         ButterKnife.bind(this);
         if (isPhone())
             mFoodItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         else
             mFoodItemsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        mAdapter = new FoodItemsRecyclerViewAdapter(getApplicationContext(), foodItemsList);
+        mAdapter = new FoodItemsRecyclerViewAdapter(getApplicationContext(), foodItemsList, this);
         mFoodItemsRecyclerView.setAdapter(mAdapter);
         getSupportLoaderManager().initLoader(FOOD_ITEMS_LOADER_ID, null, this);
     }
@@ -50,7 +50,7 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
             InputStream is = getApplicationContext().getResources().openRawResource(R.raw.baking);
             int size = is.available();
             byte[] buffer = new byte[size];
-            int i = is.read(buffer);
+            is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
         } catch (IOException ex) {
@@ -131,11 +131,19 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
 
     @Override
     public void onLoaderReset(Loader<String> loader) {
-
+        // Not implementing onLoaderReset
     }
 
     private boolean isPhone() {
         String screenType = getResources().getString(R.string.device);
         return !screenType.equals("tablet");
+    }
+
+    @Override
+    public void onFoodItemClicked(int position) {
+        FoodItem foodItem = foodItemsList.get(position);
+        Intent startRecipeActivity = new Intent(this, RecipeActivity.class);
+        startRecipeActivity.putExtra("foodItem", foodItem);
+        startActivity(startRecipeActivity);
     }
 }

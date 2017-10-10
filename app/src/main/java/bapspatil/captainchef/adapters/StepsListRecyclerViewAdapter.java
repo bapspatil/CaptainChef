@@ -18,11 +18,11 @@ import butterknife.ButterKnife;
  * Created by bapspatil
  */
 
-public class StepsListRecyclerVewAdapter extends RecyclerView.Adapter<StepsListRecyclerVewAdapter.StepsListViewHolder> {
+public class StepsListRecyclerViewAdapter extends RecyclerView.Adapter<StepsListRecyclerViewAdapter.StepsListViewHolder> {
     private Context mContext;
     private ArrayList<RecipeStep> mRecipeStepsList;
 
-    public StepsListRecyclerVewAdapter(Context context, ArrayList<RecipeStep> recipeStepArrayList) {
+    public StepsListRecyclerViewAdapter(Context context, ArrayList<RecipeStep> recipeStepArrayList) {
         mContext = context;
         mRecipeStepsList = recipeStepArrayList;
     }

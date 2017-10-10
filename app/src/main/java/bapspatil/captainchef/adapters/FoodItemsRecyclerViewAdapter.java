@@ -23,10 +23,12 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
 
     private Context mContext;
     private ArrayList<FoodItem> mFoodItemsList;
+    private OnFoodItemClickListener mClickListener;
 
-    public FoodItemsRecyclerViewAdapter(Context context, ArrayList<FoodItem> foodItemsList) {
+    public FoodItemsRecyclerViewAdapter(Context context, ArrayList<FoodItem> foodItemsList, OnFoodItemClickListener clickListener) {
         this.mContext = context;
         this.mFoodItemsList = foodItemsList;
+        this.mClickListener = clickListener;
     }
 
     @Override
@@ -53,14 +55,25 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
         return mFoodItemsList.size();
     }
 
-    class FoodItemsViewHolder extends RecyclerView.ViewHolder {
+    class FoodItemsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.food_item_tv) TextView mFoodItemTextView;
         @BindView(R.id.food_item_iv) ImageView mFoodItemImageView;
 
         FoodItemsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if(mClickListener != null)
+                mClickListener.onFoodItemClicked(getAdapterPosition());
+        }
+    }
+
+    public interface OnFoodItemClickListener {
+        void onFoodItemClicked(int position);
     }
 
 }

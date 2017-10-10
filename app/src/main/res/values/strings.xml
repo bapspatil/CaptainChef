@@ -4,4 +4,8 @@
     <string name="food_item_image_view">This is the food item</string>
     <string name="greeting">Which tasty dessert would you like to bake today?</string>
     <string name="device">phone</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="steps">Steps</string>
 </resources>
