@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,6 +39,13 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
     public void onBindViewHolder(FoodItemsViewHolder holder, int position) {
         FoodItem foodItem = mFoodItemsList.get(position);
         holder.mFoodItemTextView.setText(foodItem.getFoodName());
+        String foodName = foodItem.getFoodName();
+        switch (foodName) {
+            case "Nutella Pie": holder.mFoodItemImageView.setImageResource(R.drawable.nutella_pie); break;
+            case "Brownies": holder.mFoodItemImageView.setImageResource(R.drawable.brownie); break;
+            case "Yellow Cake": holder.mFoodItemImageView.setImageResource(R.drawable.yellow_cake); break;
+            case "Cheesecake": holder.mFoodItemImageView.setImageResource(R.drawable.cheesecake); break;
+        }
     }
 
     @Override
@@ -47,6 +55,7 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
 
     public class FoodItemsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.food_item_tv) TextView mFoodItemTextView;
+        @BindView(R.id.food_item_iv) ImageView mFoodItemImageView;
 
         FoodItemsViewHolder(View itemView) {
             super(itemView);

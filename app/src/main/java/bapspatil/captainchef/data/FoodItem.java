@@ -6,8 +6,10 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 public class FoodItem implements Parcelable {
-    private int foodId, serves;
-    private String foodName, imagePath;
+    private int foodId;
+    private String foodName;
+    private ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
+    private ArrayList<RecipeStep> recipeStepArrayList = new ArrayList<>();
 
     public int getFoodId() {
         return foodId;
@@ -17,28 +19,12 @@ public class FoodItem implements Parcelable {
         this.foodId = foodId;
     }
 
-    public int getServes() {
-        return serves;
-    }
-
-    public void setServes(int serves) {
-        this.serves = serves;
-    }
-
     public String getFoodName() {
         return foodName;
     }
 
     public void setFoodName(String foodName) {
         this.foodName = foodName;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
 
     public ArrayList<Ingredient> getIngredientArrayList() {
@@ -57,9 +43,6 @@ public class FoodItem implements Parcelable {
         this.recipeStepArrayList = recipeStepArrayList;
     }
 
-    private ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
-    private ArrayList<RecipeStep> recipeStepArrayList = new ArrayList<>();
-
     @Override
     public int describeContents() {
         return 0;
@@ -68,9 +51,7 @@ public class FoodItem implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.foodId);
-        dest.writeInt(this.serves);
         dest.writeString(this.foodName);
-        dest.writeString(this.imagePath);
         dest.writeTypedList(this.ingredientArrayList);
         dest.writeTypedList(this.recipeStepArrayList);
     }
@@ -80,9 +61,7 @@ public class FoodItem implements Parcelable {
 
     protected FoodItem(Parcel in) {
         this.foodId = in.readInt();
-        this.serves = in.readInt();
         this.foodName = in.readString();
-        this.imagePath = in.readString();
         this.ingredientArrayList = in.createTypedArrayList(Ingredient.CREATOR);
         this.recipeStepArrayList = in.createTypedArrayList(RecipeStep.CREATOR);
     }
