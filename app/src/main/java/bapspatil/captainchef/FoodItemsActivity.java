@@ -5,6 +5,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -34,7 +35,10 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_items);
         ButterKnife.bind(this);
-        mFoodItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        if (isPhone())
+            mFoodItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        else
+            mFoodItemsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mAdapter = new FoodItemsRecyclerViewAdapter(getApplicationContext(), foodItemsList);
         mFoodItemsRecyclerView.setAdapter(mAdapter);
         getSupportLoaderManager().initLoader(FOOD_ITEMS_LOADER_ID, null, this);
@@ -128,5 +132,10 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
     @Override
     public void onLoaderReset(Loader<String> loader) {
 
+    }
+
+    private boolean isPhone() {
+        String screenType = getResources().getString(R.string.device);
+        return !screenType.equals("tablet");
     }
 }

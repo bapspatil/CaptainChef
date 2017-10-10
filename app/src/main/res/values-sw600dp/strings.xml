@@ -3,5 +3,5 @@
 
     <string name="food_item_image_view">This is the food item</string>
     <string name="greeting">Which tasty dessert would you like to bake today?</string>
-    <string name="device">phone</string>
+    <string name="device">tablet</string>
 </resources>
