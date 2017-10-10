@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
  */
 
 public class StepsListRecyclerVewAdapter extends RecyclerView.Adapter<StepsListRecyclerVewAdapter.StepsListViewHolder> {
-
     private Context mContext;
     private ArrayList<RecipeStep> mRecipeStepsList;
 
@@ -37,13 +36,13 @@ public class StepsListRecyclerVewAdapter extends RecyclerView.Adapter<StepsListR
     @Override
     public void onBindViewHolder(StepsListViewHolder stepsListViewHolder, int i) {
         RecipeStep recipeStep = mRecipeStepsList.get(i);
-        stepsListViewHolder.mStepNumberTextView.setText((recipeStep.getStepId()+1));
+        stepsListViewHolder.mStepNumberTextView.setText((recipeStep.getStepId() + 1));
         stepsListViewHolder.mStepTextView.setText(recipeStep.getShortInfo());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mRecipeStepsList.size();
     }
 
     class StepsListViewHolder extends RecyclerView.ViewHolder {
