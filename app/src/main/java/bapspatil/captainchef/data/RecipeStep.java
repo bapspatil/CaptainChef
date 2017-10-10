@@ -12,6 +12,46 @@ public class RecipeStep implements Parcelable {
         return 0;
     }
 
+    public int getStepId() {
+        return stepId;
+    }
+
+    public void setStepId(int stepId) {
+        this.stepId = stepId;
+    }
+
+    public String getShortInfo() {
+        return shortInfo;
+    }
+
+    public void setShortInfo(String shortInfo) {
+        this.shortInfo = shortInfo;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.stepId);

@@ -12,7 +12,32 @@ public class Ingredient implements Parcelable {
         return 0;
     }
 
+    public int getQuant() {
+        return quant;
+    }
+
+    public void setQuant(int quant) {
+        this.quant = quant;
+    }
+
+    public String getMeasuredWith() {
+        return measuredWith;
+    }
+
+    public void setMeasuredWith(String measuredWith) {
+        this.measuredWith = measuredWith;
+    }
+
+    public String getIngredientName() {
+        return ingredientName;
+    }
+
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
+    }
+
     @Override
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.quant);
         dest.writeString(this.measuredWith);

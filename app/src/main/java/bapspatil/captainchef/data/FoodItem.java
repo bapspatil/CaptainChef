@@ -8,6 +8,55 @@ import java.util.ArrayList;
 public class FoodItem implements Parcelable {
     private int foodId, serves;
     private String foodName, imagePath;
+
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
+    }
+
+    public int getServes() {
+        return serves;
+    }
+
+    public void setServes(int serves) {
+        this.serves = serves;
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public ArrayList<Ingredient> getIngredientArrayList() {
+        return ingredientArrayList;
+    }
+
+    public void setIngredientArrayList(ArrayList<Ingredient> ingredientArrayList) {
+        this.ingredientArrayList = ingredientArrayList;
+    }
+
+    public ArrayList<RecipeStep> getRecipeStepArrayList() {
+        return recipeStepArrayList;
+    }
+
+    public void setRecipeStepArrayList(ArrayList<RecipeStep> recipeStepArrayList) {
+        this.recipeStepArrayList = recipeStepArrayList;
+    }
+
     private ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
     private ArrayList<RecipeStep> recipeStepArrayList = new ArrayList<>();
 
