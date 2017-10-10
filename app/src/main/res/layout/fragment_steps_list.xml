@@ -25,13 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        android:background="@color/colorPrimaryDark"/>
-
     <TextView
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"

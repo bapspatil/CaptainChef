@@ -28,12 +28,13 @@ import butterknife.ButterKnife;
 public class FoodItemsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>, FoodItemsRecyclerViewAdapter.OnFoodItemClickListener {
     private ArrayList<FoodItem> foodItemsList = new ArrayList<>();
     private static final int FOOD_ITEMS_LOADER_ID = 13;
-    @BindView(R.id.food_items_rv) RecyclerView mFoodItemsRecyclerView;
     private FoodItemsRecyclerViewAdapter mAdapter;
+    @BindView(R.id.food_items_rv) RecyclerView mFoodItemsRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_food_items);
         ButterKnife.bind(this);
         if (isPhone())
             mFoodItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

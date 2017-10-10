@@ -37,7 +37,7 @@ public class IngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ingredi
     public void onBindViewHolder(IngredientsViewHolder ingredientsViewHolder, int i) {
         Ingredient ingredient = mIngredientsList.get(i);
         ingredientsViewHolder.mIngredientTextView.setText(ingredient.getIngredientName());
-        ingredientsViewHolder.mQuantityTextView.setText(ingredient.getQuant());
+        ingredientsViewHolder.mQuantityTextView.setText(String.valueOf(ingredient.getQuant()));
         ingredientsViewHolder.mMeasureTextView.setText(ingredient.getMeasuredWith());
     }
 

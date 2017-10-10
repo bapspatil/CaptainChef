@@ -1,6 +1,5 @@
 package bapspatil.captainchef;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by bapspatil
  */
 public class StepsListFragment extends Fragment {
-    private OnStepClickListener mListener;
+//    private OnStepClickListener mListener;
     @BindView(R.id.ingredients_rv) RecyclerView mIngredientsRecyclerView;
     @BindView(R.id.steps_rv) RecyclerView mStepsRecyclerView;
     private ArrayList<Ingredient> ingredientsList;
@@ -63,7 +62,7 @@ public class StepsListFragment extends Fragment {
 
         return rootView;
     }
-    @Override
+    /*@Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnStepClickListener) {
@@ -76,5 +75,5 @@ public class StepsListFragment extends Fragment {
 
     public interface OnStepClickListener {
         void onStepClicked(int position);
-    }
+    }*/
 }
