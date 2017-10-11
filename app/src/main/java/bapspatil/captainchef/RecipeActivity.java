@@ -1,5 +1,6 @@
 package bapspatil.captainchef;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +16,6 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
 
     private ArrayList<Ingredient> ingredientsList = new ArrayList<>();
     private ArrayList<RecipeStep> recipeStepsList = new ArrayList<>();
-    StepsDetailsFragment stepsDetailsFragment;
     FragmentManager fragmentManager;
     private boolean mTwoPane;
 
@@ -47,9 +47,12 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
 
     @Override
     public void onStepClicked(RecipeStep mRecipeStep) {
-        stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep);
-        fragmentManager.beginTransaction()
-                .replace(R.id.recipe_container, stepsDetailsFragment)
-                .commit();
+        if(!mTwoPane) {
+            Intent startRecipeDetailsActivity = new Intent(this, RecipeDetailsActivity.class);
+            startRecipeDetailsActivity.putExtra("recipeStep", mRecipeStep);
+            startActivity(startRecipeDetailsActivity);
+        } else {
+            // TODO: Add the fragment here for tablets.
+        }
     }
 }
