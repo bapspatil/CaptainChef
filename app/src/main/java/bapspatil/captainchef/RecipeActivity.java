@@ -36,6 +36,11 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
                     .commit();
 
         } else {
+            mTwoPane = true;
+            StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.recipe_container, stepsListFragment)
+                    .commit();
 
         }
     }
@@ -53,6 +58,11 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
             startActivity(startRecipeDetailsActivity);
         } else {
             // TODO: Add the fragment here for tablets.
+            StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep);
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.recipe_details_container, stepsDetailsFragment)
+                    .commit();
         }
     }
 }
