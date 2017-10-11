@@ -1,6 +1,7 @@
 package bapspatil.captainchef;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.devbrackets.android.exomedia.listener.OnPreparedListener;
+import com.devbrackets.android.exomedia.ui.widget.VideoView;
 
 import bapspatil.captainchef.data.RecipeStep;
 import butterknife.BindView;
@@ -18,10 +20,9 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StepsDetailsFragment extends Fragment {
+public class StepsDetailsFragment extends Fragment implements OnPreparedListener{
     @BindView(R.id.step_description_tv) TextView mStepDescription;
-    @BindView(R.id.video_exoplayer_view) SimpleExoPlayerView mExoPlayerView;
-
+    @BindView(R.id.video_view) VideoView mVideoView;
     private RecipeStep recipeStep;
 
     public StepsDetailsFragment() {
@@ -45,12 +46,15 @@ public class StepsDetailsFragment extends Fragment {
         recipeStep = getArguments().getParcelable("recipeStep");
         if (recipeStep != null) {
             mStepDescription.setText(recipeStep.getInfo());
+            mVideoView.setOnPreparedListener(this);
+            mVideoView.setVideoURI(Uri.parse(recipeStep.getVideoUrl()));
         }
         return rootView;
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public void onPrepared() {
+        mVideoView.start();
     }
+
 }

@@ -3,22 +3,16 @@ package bapspatil.captainchef;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.view.View;
 
 import java.util.ArrayList;
 
 import bapspatil.captainchef.data.FoodItem;
 import bapspatil.captainchef.data.Ingredient;
 import bapspatil.captainchef.data.RecipeStep;
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class RecipeActivity extends AppCompatActivity {
 
-    @BindView(R.id.prev_button) CardView mPrevButton;
-    @BindView(R.id.next_button) CardView mNextButton;
     private ArrayList<Ingredient> ingredientsList = new ArrayList<>();
     private ArrayList<RecipeStep> recipeStepsList = new ArrayList<>();
     private boolean mTwoPane;
@@ -41,16 +35,6 @@ public class RecipeActivity extends AppCompatActivity {
         } else {
 
         }
-    }
-
-    @OnClick(R.id.prev_button)
-    public void prevStep(View view) {
-
-    }
-
-    @OnClick(R.id.next_button)
-    public void nextStep(View view) {
-
     }
 
     private boolean isPhone() {
