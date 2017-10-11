@@ -7,15 +7,12 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
-import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.decoder.DecoderCounters;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
@@ -30,7 +27,6 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.google.android.exoplayer2.video.VideoRendererEventListener;
 
 import bapspatil.captainchef.data.RecipeStep;
 import butterknife.BindView;
@@ -42,7 +38,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StepsDetailsFragment extends Fragment implements VideoRendererEventListener {
+public class StepsDetailsFragment extends Fragment  {
     @BindView(R.id.step_description_tv) TextView mStepDescription;
     @BindView(R.id.video_exoplayer_view) SimpleExoPlayerView mPlayerView;
     @BindView(R.id.next_button) CardView nextButton;
@@ -121,38 +117,5 @@ public class StepsDetailsFragment extends Fragment implements VideoRendererEvent
         mPlayer.setPlayWhenReady(true);
     }
 
-    @Override
-    public void onVideoEnabled(DecoderCounters decoderCounters) {
 
-    }
-
-    @Override
-    public void onVideoDecoderInitialized(String s, long l, long l1) {
-
-    }
-
-    @Override
-    public void onVideoInputFormatChanged(Format format) {
-
-    }
-
-    @Override
-    public void onDroppedFrames(int i, long l) {
-
-    }
-
-    @Override
-    public void onVideoSizeChanged(int i, int i1, int i2, float v) {
-
-    }
-
-    @Override
-    public void onRenderedFirstFrame(Surface surface) {
-
-    }
-
-    @Override
-    public void onVideoDisabled(DecoderCounters decoderCounters) {
-
-    }
 }
