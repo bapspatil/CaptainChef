@@ -1,6 +1,7 @@
 package bapspatil.captainchef;
 
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,8 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.util.ArrayList;
+
 import bapspatil.captainchef.data.RecipeStep;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,15 +49,21 @@ public class StepsDetailsFragment extends Fragment  {
     private SimpleExoPlayer mPlayer;
     private Unbinder unbinder;
     private RecipeStep recipeStep;
+    private ArrayList<RecipeStep> recipeStepsList;
+    OnButtonClickListener mButtonListener;
+
+    public static final int PREV_BUTTON = 0;
+    public static final int NEXT_BUTTON = 1;
 
     public StepsDetailsFragment() {
         // Required empty public constructor
     }
 
-    public static StepsDetailsFragment newInstance(RecipeStep recipeStep) {
+    public static StepsDetailsFragment newInstance(RecipeStep recipeStep, ArrayList<RecipeStep> recipeStepArrayList) {
         StepsDetailsFragment stepsDetailsFragment = new StepsDetailsFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable("recipeStep", recipeStep);
+        bundle.putParcelableArrayList("recipeList", recipeStepArrayList);
         stepsDetailsFragment.setArguments(bundle);
         return stepsDetailsFragment;
     }
@@ -66,6 +75,7 @@ public class StepsDetailsFragment extends Fragment  {
         unbinder = ButterKnife.bind(this, rootView);
 
         recipeStep = getArguments().getParcelable("recipeStep");
+        recipeStepsList = getArguments().getParcelableArrayList("recipeList");
         if (recipeStep != null) {
             mStepDescription.setText(recipeStep.getInfo());
             getPlayer();
@@ -82,12 +92,12 @@ public class StepsDetailsFragment extends Fragment  {
 
     @OnClick(R.id.prev_button)
     void prevStep(View view) {
-
+        mButtonListener.onButtonClicked(PREV_BUTTON, recipeStep, recipeStepsList);
     }
 
     @OnClick(R.id.next_button)
     void nextStep(View view) {
-
+        mButtonListener.onButtonClicked(NEXT_BUTTON, recipeStep, recipeStepsList);
     }
 
     private void getPlayer() {
@@ -115,6 +125,24 @@ public class StepsDetailsFragment extends Fragment  {
 // Prepare the player with the source.
         mPlayer.prepare(videoSource);
         mPlayer.setPlayWhenReady(true);
+    }
+
+    public interface OnButtonClickListener {
+        void onButtonClicked(int buttonClicked, RecipeStep recipeStep, ArrayList<RecipeStep> recipeSteps);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // This makes sure that the host activity has implemented the callback interface
+        // If not, it throws an exception
+        try {
+            mButtonListener = (OnButtonClickListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnButtonClickListener");
+        }
     }
 
 }

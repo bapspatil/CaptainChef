@@ -38,7 +38,7 @@ public class StepsListRecyclerViewAdapter extends RecyclerView.Adapter<StepsList
     @Override
     public void onBindViewHolder(StepsListViewHolder stepsListViewHolder, int i) {
         RecipeStep recipeStep = mRecipeStepsList.get(i);
-        stepsListViewHolder.mStepNumberTextView.setText(String.valueOf((recipeStep.getStepId() + 1)));
+        stepsListViewHolder.mStepNumberTextView.setText(String.valueOf(recipeStep.getStepId()));
         stepsListViewHolder.mStepTextView.setText(recipeStep.getShortInfo());
     }
 

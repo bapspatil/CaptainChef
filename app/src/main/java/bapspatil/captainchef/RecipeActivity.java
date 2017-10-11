@@ -55,10 +55,10 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
         if(!mTwoPane) {
             Intent startRecipeDetailsActivity = new Intent(this, RecipeDetailsActivity.class);
             startRecipeDetailsActivity.putExtra("recipeStep", mRecipeStep);
+            startRecipeDetailsActivity.putParcelableArrayListExtra("recipeList", recipeStepsList);
             startActivity(startRecipeDetailsActivity);
         } else {
-            // TODO: Add the fragment here for tablets.
-            StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep);
+            StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep, recipeStepsList);
             fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.recipe_details_container, stepsDetailsFragment)
