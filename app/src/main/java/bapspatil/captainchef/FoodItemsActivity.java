@@ -42,6 +42,7 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
             mFoodItemsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mAdapter = new FoodItemsRecyclerViewAdapter(getApplicationContext(), foodItemsList, this);
         mFoodItemsRecyclerView.setAdapter(mAdapter);
+        mFoodItemsRecyclerView.setHasFixedSize(true);
         getSupportLoaderManager().initLoader(FOOD_ITEMS_LOADER_ID, null, this);
     }
 
