@@ -41,7 +41,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StepsDetailsFragment extends Fragment  {
+public class StepsDetailsFragment extends Fragment {
     @BindView(R.id.step_description_tv) TextView mStepDescription;
     @BindView(R.id.video_exoplayer_view) SimpleExoPlayerView mPlayerView;
     @BindView(R.id.next_button) CardView nextButton;
@@ -79,6 +79,14 @@ public class StepsDetailsFragment extends Fragment  {
         if (recipeStep != null) {
             mStepDescription.setText(recipeStep.getInfo());
             getPlayer();
+            if (recipeStep.getStepId() == 0) {
+                prevButton.setVisibility(View.INVISIBLE);
+            } else if (recipeStep.getStepId() == (recipeStepsList.size() - 1)) {
+                nextButton.setVisibility(View.INVISIBLE);
+            } else {
+                prevButton.setVisibility(View.VISIBLE);
+                nextButton.setVisibility(View.VISIBLE);
+            }
         }
         return rootView;
     }
@@ -92,12 +100,12 @@ public class StepsDetailsFragment extends Fragment  {
 
     @OnClick(R.id.prev_button)
     void prevStep(View view) {
-        mButtonListener.onButtonClicked(PREV_BUTTON, recipeStep, recipeStepsList);
+        mButtonListener.onButtonClicked(PREV_BUTTON, recipeStep, recipeStepsList, view);
     }
 
     @OnClick(R.id.next_button)
     void nextStep(View view) {
-        mButtonListener.onButtonClicked(NEXT_BUTTON, recipeStep, recipeStepsList);
+        mButtonListener.onButtonClicked(NEXT_BUTTON, recipeStep, recipeStepsList, view);
     }
 
     private void getPlayer() {
@@ -128,7 +136,7 @@ public class StepsDetailsFragment extends Fragment  {
     }
 
     public interface OnButtonClickListener {
-        void onButtonClicked(int buttonClicked, RecipeStep recipeStep, ArrayList<RecipeStep> recipeSteps);
+        void onButtonClicked(int buttonClicked, RecipeStep recipeStep, ArrayList<RecipeStep> recipeSteps, View view);
     }
 
     @Override

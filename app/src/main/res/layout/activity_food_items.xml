@@ -22,13 +22,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:background="@color/colorPrimary"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/food_items_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"/>
 </LinearLayout>
