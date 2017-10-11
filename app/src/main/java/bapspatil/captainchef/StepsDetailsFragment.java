@@ -117,5 +117,4 @@ public class StepsDetailsFragment extends Fragment  {
         mPlayer.setPlayWhenReady(true);
     }
 
-
 }
