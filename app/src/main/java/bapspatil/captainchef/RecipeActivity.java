@@ -11,10 +11,12 @@ import bapspatil.captainchef.data.Ingredient;
 import bapspatil.captainchef.data.RecipeStep;
 import butterknife.ButterKnife;
 
-public class RecipeActivity extends AppCompatActivity {
+public class RecipeActivity extends AppCompatActivity implements StepsListFragment.OnStepClickListener {
 
     private ArrayList<Ingredient> ingredientsList = new ArrayList<>();
     private ArrayList<RecipeStep> recipeStepsList = new ArrayList<>();
+    StepsDetailsFragment stepsDetailsFragment;
+    FragmentManager fragmentManager;
     private boolean mTwoPane;
 
     @Override
@@ -22,7 +24,7 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         ButterKnife.bind(this);
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         FoodItem foodItem = getIntent().getParcelableExtra("foodItem");
         ingredientsList = foodItem.getIngredientArrayList();
         recipeStepsList = foodItem.getRecipeStepArrayList();
@@ -32,6 +34,7 @@ public class RecipeActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .replace(R.id.recipe_container, stepsListFragment)
                     .commit();
+
         } else {
 
         }
@@ -40,5 +43,13 @@ public class RecipeActivity extends AppCompatActivity {
     private boolean isPhone() {
         String screenType = getResources().getString(R.string.device);
         return !screenType.equals("tablet");
+    }
+
+    @Override
+    public void onStepClicked(RecipeStep mRecipeStep) {
+        stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep);
+        fragmentManager.beginTransaction()
+                .replace(R.id.recipe_container, stepsDetailsFragment)
+                .commit();
     }
 }

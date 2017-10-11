@@ -1,5 +1,6 @@
 package bapspatil.captainchef;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +24,7 @@ import butterknife.Unbinder;
 /**
  * Created by bapspatil
  */
-public class StepsListFragment extends Fragment {
+public class StepsListFragment extends Fragment implements StepsListRecyclerViewAdapter.OnRecipeStepClickedListener{
     //    private OnStepClickListener mListener;
     @BindView(R.id.ingredients_rv) RecyclerView mIngredientsRecyclerView;
     @BindView(R.id.steps_rv) RecyclerView mStepsRecyclerView;
@@ -35,6 +36,7 @@ public class StepsListFragment extends Fragment {
     private ArrayList<RecipeStep> recipeStepsList;
     private StepsListRecyclerViewAdapter mStepsListAdapter;
     private Unbinder unbinder;
+    OnStepClickListener mStepClickListener;
 
     public StepsListFragment() {
         // Empty constructor
@@ -60,7 +62,7 @@ public class StepsListFragment extends Fragment {
         recipeStepsList = getArguments().getParcelableArrayList("recipeStepsList");
 
         mIngredientsAdapter = new IngredientsRecyclerViewAdapter(getContext(), ingredientsList);
-        mStepsListAdapter = new StepsListRecyclerViewAdapter(getContext(), recipeStepsList);
+        mStepsListAdapter = new StepsListRecyclerViewAdapter(getContext(), recipeStepsList, this);
         mIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
         mStepsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -74,18 +76,26 @@ public class StepsListFragment extends Fragment {
         unbinder.unbind();
     }
 
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnStepClickListener) {
-            mListener = (OnStepClickListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnStepClickListener");
-        }
+    @Override
+    public void onRecipeStepClicked(RecipeStep recipeStep) {
+        mStepClickListener.onStepClicked(recipeStep);
     }
 
     public interface OnStepClickListener {
-        void onStepClicked(int position);
-    }*/
+        void onStepClicked(RecipeStep mRecipeStep);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // This makes sure that the host activity has implemented the callback interface
+        // If not, it throws an exception
+        try {
+            mStepClickListener = (OnStepClickListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnStepClickListener");
+        }
+    }
 }
