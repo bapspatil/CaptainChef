@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="#CC000000"
+        android:background="#C0000000"
         android:padding="16dp"
         android:textColor="#FFF"
         tools:text="Cheese Cake"/>

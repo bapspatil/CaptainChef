@@ -1,5 +1,6 @@
 package bapspatil.captainchef;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -9,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -147,6 +147,10 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
         FoodItem foodItem = foodItemsList.get(position);
         Intent startRecipeActivity = new Intent(this, RecipeActivity.class);
         startRecipeActivity.putExtra("foodItem", foodItem);
-        startActivity(startRecipeActivity);
+        ActivityOptions options =
+                ActivityOptions.makeCustomAnimation(getApplicationContext(), android.R.anim.fade_in, android.R.anim.fade_out);
+        startActivity(startRecipeActivity, options.toBundle());
     }
+
+
 }

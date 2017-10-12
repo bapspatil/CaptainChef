@@ -1,5 +1,6 @@
 package bapspatil.captainchef;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -32,6 +33,7 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
             mTwoPane = false;
             StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList);
             fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.recipe_container, stepsListFragment)
                     .commit();
 
@@ -39,6 +41,7 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
             mTwoPane = true;
             StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList);
             fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.recipe_container, stepsListFragment)
                     .commit();
 
@@ -56,13 +59,22 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
             Intent startRecipeDetailsActivity = new Intent(this, RecipeDetailsActivity.class);
             startRecipeDetailsActivity.putExtra("recipeStep", mRecipeStep);
             startRecipeDetailsActivity.putParcelableArrayListExtra("recipeList", recipeStepsList);
-            startActivity(startRecipeDetailsActivity);
+            ActivityOptions options =
+                    ActivityOptions.makeCustomAnimation(getApplicationContext(), android.R.anim.fade_in, android.R.anim.fade_out);
+            startActivity(startRecipeDetailsActivity, options.toBundle());
         } else {
             StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep, recipeStepsList);
             fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.recipe_details_container, stepsDetailsFragment)
                     .commit();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        RecipeActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

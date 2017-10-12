@@ -26,6 +26,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsDet
         StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep, mRecipeStepsList);
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .replace(R.id.recipe_details_container, stepsDetailsFragment)
                 .commit();
     }
@@ -67,6 +68,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsDet
             StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(prevRecipeStep, mRecipeStepsList);
             fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.recipe_details_container, stepsDetailsFragment)
                     .commit();
         } else {
@@ -86,8 +88,15 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsDet
             StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(nextRecipeStep, mRecipeStepsList);
             fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.recipe_details_container, stepsDetailsFragment)
                     .commit();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        RecipeDetailsActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }
