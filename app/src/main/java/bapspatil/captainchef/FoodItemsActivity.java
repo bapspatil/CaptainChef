@@ -25,6 +25,7 @@ import bapspatil.captainchef.data.Ingredient;
 import bapspatil.captainchef.data.RecipeStep;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public class FoodItemsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>, FoodItemsRecyclerViewAdapter.OnFoodItemClickListener {
     private ArrayList<FoodItem> foodItemsList = new ArrayList<>();
@@ -37,6 +38,8 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_items);
         ButterKnife.bind(this);
+        Toasty.info(getApplicationContext(), "App developed by Bapusaheb Patil", 5000).show();
+
         if (isPhone())
             mFoodItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         else
@@ -44,6 +47,7 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
         mAdapter = new FoodItemsRecyclerViewAdapter(getApplicationContext(), foodItemsList, this);
         mFoodItemsRecyclerView.setAdapter(mAdapter);
         mFoodItemsRecyclerView.setHasFixedSize(true);
+
         getSupportLoaderManager().initLoader(FOOD_ITEMS_LOADER_ID, null, this);
     }
 
@@ -144,6 +148,7 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
 
     @Override
     public void onFoodItemClicked(int position) {
+        Toasty.info(getApplicationContext(), "This recipe serves 8 people", 5000).show();
         FoodItem foodItem = foodItemsList.get(position);
         Intent startRecipeActivity = new Intent(this, RecipeActivity.class);
         startRecipeActivity.putExtra("foodItem", foodItem);
