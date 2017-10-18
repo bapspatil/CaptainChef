@@ -1,5 +1,6 @@
 package bapspatil.captainchef;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,6 +68,7 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
         return json;
     }
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     public Loader<String> onCreateLoader(int i, final Bundle bundle) {
         return new AsyncTaskLoader<String>(this) {
