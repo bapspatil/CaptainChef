@@ -11,6 +11,8 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
@@ -24,6 +26,9 @@ public class FoodItemsActivityTest {
 
     @Test
     public void clickFoodItem_OpensRecipeDetails() {
+
+        // To check if the RecyclerView for food items is displayed or not
+        onView(withId(R.id.food_items_rv)).check(matches(isDisplayed()));
 
         // To click on the first item in the RecyclerView of food items
         onView(withRecyclerView(R.id.food_items_rv).atPosition(0)).perform(click());
