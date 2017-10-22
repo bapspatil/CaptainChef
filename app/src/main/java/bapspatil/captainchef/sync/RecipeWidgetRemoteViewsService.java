@@ -8,8 +8,11 @@ import android.widget.RemoteViewsService;
 import java.util.ArrayList;
 
 import bapspatil.captainchef.R;
-import bapspatil.captainchef.RecipeWidgetProvider;
 import bapspatil.captainchef.data.Ingredient;
+
+import static bapspatil.captainchef.RecipeWidgetProvider.ingredientArrayList;
+
+;
 
 /**
  * Created by bapspatil
@@ -39,7 +42,7 @@ public class RecipeWidgetRemoteViewsService extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
-            remoteIngredientsList = RecipeWidgetProvider.ingredientArrayList;
+            remoteIngredientsList = ingredientArrayList;
         }
 
         @Override
@@ -49,12 +52,13 @@ public class RecipeWidgetRemoteViewsService extends RemoteViewsService {
 
         @Override
         public int getCount() {
-            return remoteIngredientsList.size();
+            if (remoteIngredientsList == null) return 0;
+            else return remoteIngredientsList.size();
         }
 
         @Override
         public RemoteViews getViewAt(int i) {
-            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.id.widget_ingredients_list_view);
+            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.recipe_widget_list_item_view);
             views.setTextViewText(R.id.widget_ingredients_text_view, remoteIngredientsList.get(i).getIngredientName().toUpperCase() + "\n  Quantity: " + remoteIngredientsList.get(i).getQuant() + "\n  Measure: " + remoteIngredientsList.get(i).getMeasuredWith());
             Intent fillInIntent = new Intent();
             views.setOnClickFillInIntent(R.id.widget_ingredients_text_view, fillInIntent);

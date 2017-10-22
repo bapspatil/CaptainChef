@@ -1,7 +1,6 @@
 package bapspatil.captainchef.sync;
 
 import android.app.IntentService;
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -33,10 +32,10 @@ public class UpdateRecipeService extends IntentService {
     }
 
     private void handleRecipeWidgetUpdate(Intent intent) {
-        String foodItemName = intent.getExtras().getString("foodItemName");
-        ArrayList<Ingredient> ingredientArrayList = intent.getExtras().getParcelableArrayList("ingredientsList");
-        Intent intentToWidget = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        intentToWidget.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        String foodItemName = intent.getStringExtra("foodItemName");
+        ArrayList<Ingredient> ingredientArrayList = intent.getParcelableArrayListExtra("ingredientsList");
+        Intent intentToWidget = new Intent("android.appwidget.action.RECIPE_UPDATE");
+        intentToWidget.setAction("android.appwidget.action.RECIPE_UPDATE");
         intentToWidget.putExtra("foodItemName", foodItemName);
         intentToWidget.putExtra("ingredientsList", ingredientArrayList);
         sendBroadcast(intentToWidget);

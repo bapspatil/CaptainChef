@@ -3,6 +3,7 @@ package bapspatil.captainchef;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
     @BindView(R.id.ingredient_label_tv) TextView mIngredLabelTextView;
     @BindView(R.id.line_view) View lineView;
     @BindView(R.id.steps_label_tv) TextView mStepsLabelTextView;
+    @BindView(R.id.add_to_widget_button) CardView addToWidgetButton;
     private ArrayList<Ingredient> ingredientsList;
     private IngredientsRecyclerViewAdapter mIngredientsAdapter;
     private ArrayList<RecipeStep> recipeStepsList;

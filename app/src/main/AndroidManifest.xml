@@ -29,13 +29,18 @@
         <receiver android:name=".RecipeWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.RECIPE_UPDATE"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/recipe_widget_provider_info"/>
         </receiver>
-        <service android:name=".sync.RecipeWidgetRemoteViewsService"/>
+
+        <service
+            android:name=".sync.RecipeWidgetRemoteViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
         <service android:name=".sync.UpdateRecipeService"/>
     </application>
 

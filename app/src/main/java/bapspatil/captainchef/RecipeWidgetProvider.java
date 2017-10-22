@@ -62,7 +62,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, RecipeWidgetProvider.class));
         final String action = intent.getAction();
-        if (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+        if (action.equals("android.appwidget.action.RECIPE_UPDATE")) {
             ingredientArrayList = intent.getExtras().getParcelableArrayList("ingredientsList");
             foodItemName = intent.getExtras().getString("foodItemName");
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_ingredients_list_view);
