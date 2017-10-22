@@ -41,10 +41,9 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
-        /*for (int appWidgetId : appWidgetIds) {
+        for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
-        }*/
+        }
     }
 
     @Override
@@ -63,10 +62,10 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, RecipeWidgetProvider.class));
         final String action = intent.getAction();
         if (action.equals("android.appwidget.action.RECIPE_UPDATE")) {
-            ingredientArrayList = intent.getExtras().getParcelableArrayList("ingredientsList");
-            foodItemName = intent.getExtras().getString("foodItemName");
+            ingredientArrayList = intent.getParcelableArrayListExtra("ingredientsList");
+            foodItemName = intent.getStringExtra("foodItemName");
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_ingredients_list_view);
-            RecipeWidgetProvider.updateRecipeWidgets(context, appWidgetManager, appWidgetIds);
+            updateRecipeWidgets(context, appWidgetManager, appWidgetIds);
             super.onReceive(context, intent);
         }
     }

@@ -19,7 +19,7 @@ public class UpdateRecipeService extends IntentService {
 
     public static void startRecipeWidgetService(Context context, ArrayList<Ingredient> ingredientArrayList, String foodItemName) {
         Intent intent = new Intent(context, UpdateRecipeService.class);
-        intent.putExtra("ingredientsList", ingredientArrayList);
+        intent.putParcelableArrayListExtra("ingredientsList", ingredientArrayList);
         intent.putExtra("foodItemName", foodItemName);
         context.startService(intent);
     }
@@ -27,17 +27,17 @@ public class UpdateRecipeService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         if(intent != null) {
-            handleRecipeWidgetUpdate(intent);
+            String foodItemName = intent.getStringExtra("foodItemName");
+            ArrayList<Ingredient> ingredientArrayList = intent.getParcelableArrayListExtra("ingredientsList");
+            handleRecipeWidgetUpdate(foodItemName, ingredientArrayList);
         }
     }
 
-    private void handleRecipeWidgetUpdate(Intent intent) {
-        String foodItemName = intent.getStringExtra("foodItemName");
-        ArrayList<Ingredient> ingredientArrayList = intent.getParcelableArrayListExtra("ingredientsList");
+    public void handleRecipeWidgetUpdate(String foodItemName, ArrayList<Ingredient> ingredientArrayList) {
         Intent intentToWidget = new Intent("android.appwidget.action.RECIPE_UPDATE");
         intentToWidget.setAction("android.appwidget.action.RECIPE_UPDATE");
         intentToWidget.putExtra("foodItemName", foodItemName);
-        intentToWidget.putExtra("ingredientsList", ingredientArrayList);
+        intentToWidget.putParcelableArrayListExtra("ingredientsList", ingredientArrayList);
         sendBroadcast(intentToWidget);
     }
 }

@@ -27,9 +27,9 @@ public class RecipeWidgetRemoteViewsService extends RemoteViewsService {
         return new RecipeWidgetRemoteViewsFactory(this.getApplicationContext(), intent);
     }
 
-    class RecipeWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+    public class RecipeWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
-        Context mContext = null;
+        Context mContext;
 
         public RecipeWidgetRemoteViewsFactory(Context context, Intent intent) {
             mContext = context;
@@ -59,9 +59,7 @@ public class RecipeWidgetRemoteViewsService extends RemoteViewsService {
         @Override
         public RemoteViews getViewAt(int i) {
             RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.recipe_widget_list_item_view);
-            views.setTextViewText(R.id.widget_ingredients_text_view, remoteIngredientsList.get(i).getIngredientName().toUpperCase() + "\n  Quantity: " + remoteIngredientsList.get(i).getQuant() + "\n  Measure: " + remoteIngredientsList.get(i).getMeasuredWith());
-            Intent fillInIntent = new Intent();
-            views.setOnClickFillInIntent(R.id.widget_ingredients_text_view, fillInIntent);
+            views.setTextViewText(R.id.widget_ingredients_text_view, remoteIngredientsList.get(i).getIngredientName());
             return views;
         }
 

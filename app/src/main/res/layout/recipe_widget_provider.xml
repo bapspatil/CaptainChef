@@ -15,8 +15,7 @@
         android:contentDescription="@string/appwidget_text"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
-        android:textStyle="bold"
-        tools:text="Food Item Name"/>
+        android:textStyle="bold"/>
 
     <ImageView
         android:layout_width="match_parent"

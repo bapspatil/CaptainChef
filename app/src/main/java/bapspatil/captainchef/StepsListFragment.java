@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import es.dmoral.toasty.Toasty;
 
 
 /**
@@ -108,6 +109,7 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
     @OnClick(R.id.add_to_widget_button)
     void addToWidget(View view) {
         UpdateRecipeService.startRecipeWidgetService(getContext(), ingredientsList, foodItemName);
+        Toasty.info(getContext(), "Recipe ingredients have been added to homescreen widget!", 5000).show();
     }
 
 }
