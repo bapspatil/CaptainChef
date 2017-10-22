@@ -27,11 +27,12 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
         ButterKnife.bind(this);
         fragmentManager = getSupportFragmentManager();
         FoodItem foodItem = getIntent().getParcelableExtra("foodItem");
+        String foodItemName = foodItem.getFoodName();
         ingredientsList = foodItem.getIngredientArrayList();
         recipeStepsList = foodItem.getRecipeStepArrayList();
         if (isPhone()) {
             mTwoPane = false;
-            StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList);
+            StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName);
             fragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.recipe_container, stepsListFragment)
@@ -39,7 +40,7 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
 
         } else {
             mTwoPane = true;
-            StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList);
+            StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName);
             fragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.recipe_container, stepsListFragment)

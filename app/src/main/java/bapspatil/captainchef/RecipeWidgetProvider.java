@@ -1,38 +1,50 @@
 package bapspatil.captainchef;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
+
+import java.util.ArrayList;
+
+import bapspatil.captainchef.data.Ingredient;
+import bapspatil.captainchef.sync.RecipeWidgetRemoteViewsService;
 
 /**
  * Created by bapspatil
  */
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+    public static ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
+    public static String foodItemName;
+
+    public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget_provider);
-        views.setTextViewText(R.id.appwidget_food_item_title, "Food Item");
+        views.setTextViewText(R.id.appwidget_food_item_title, foodItemName);
 
-        Intent intent = new Intent(context, FoodItemsActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 13, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.appwidget_food_item_title, pendingIntent);
+        Intent intentForListView = new Intent(context, RecipeWidgetRemoteViewsService.class);
+        views.setRemoteAdapter(R.id.widget_ingredients_list_view, intentForListView);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
+    public static void updateRecipeWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
+    }
+
+    @Override
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        // There may be multiple widgets active, so update all of them
+        /*for (int appWidgetId : appWidgetIds) {
+            updateAppWidget(context, appWidgetManager, appWidgetId);
+        }*/
     }
 
     @Override
@@ -43,6 +55,20 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, RecipeWidgetProvider.class));
+        final String action = intent.getAction();
+        if (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+            ingredientArrayList = intent.getExtras().getParcelableArrayList("ingredientsList");
+            foodItemName = intent.getExtras().getString("foodItemName");
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_ingredients_list_view);
+            RecipeWidgetProvider.updateRecipeWidgets(context, appWidgetManager, appWidgetIds);
+            super.onReceive(context, intent);
+        }
     }
 }
 

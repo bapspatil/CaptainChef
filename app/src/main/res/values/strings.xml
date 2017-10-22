@@ -10,6 +10,9 @@
     <string name="steps">Steps</string>
     <string name="prev_step">PREV STEP</string>
     <string name="next_step">NEXT STEP</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Food item name</string>
     <string name="add_widget">Add widget</string>
+    <string name="empty_view">Empty view</string>
+    <string name="add_ingredients_list_to_widget">Add ingredients list to widget</string>
+    <string name="choose_a_food_item_from_the_app">Choose a food item from the app</string>
 </resources>

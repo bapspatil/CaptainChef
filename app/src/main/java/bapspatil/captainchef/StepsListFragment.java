@@ -16,8 +16,10 @@ import bapspatil.captainchef.adapters.IngredientsRecyclerViewAdapter;
 import bapspatil.captainchef.adapters.StepsListRecyclerViewAdapter;
 import bapspatil.captainchef.data.Ingredient;
 import bapspatil.captainchef.data.RecipeStep;
+import bapspatil.captainchef.sync.UpdateRecipeService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
@@ -35,6 +37,7 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
     private IngredientsRecyclerViewAdapter mIngredientsAdapter;
     private ArrayList<RecipeStep> recipeStepsList;
     private StepsListRecyclerViewAdapter mStepsListAdapter;
+    private String foodItemName;
     private Unbinder unbinder;
     OnStepClickListener mStepClickListener;
 
@@ -42,11 +45,12 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
         // Empty constructor
     }
 
-    public static StepsListFragment newInstance(ArrayList<Ingredient> mIngredientsList, ArrayList<RecipeStep> mRecipeList) {
+    public static StepsListFragment newInstance(ArrayList<Ingredient> mIngredientsList, ArrayList<RecipeStep> mRecipeList, String mFoodItemName) {
         StepsListFragment stepsListFragment = new StepsListFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("ingredientsList", mIngredientsList);
         bundle.putParcelableArrayList("recipeStepsList", mRecipeList);
+        bundle.putString("foodItemName", mFoodItemName);
         stepsListFragment.setArguments(bundle);
         return stepsListFragment;
     }
@@ -60,7 +64,7 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
 
         ingredientsList = getArguments().getParcelableArrayList("ingredientsList");
         recipeStepsList = getArguments().getParcelableArrayList("recipeStepsList");
-
+        foodItemName = getArguments().getString("foodItemName");
         mIngredientsAdapter = new IngredientsRecyclerViewAdapter(getContext(), ingredientsList);
         mStepsListAdapter = new StepsListRecyclerViewAdapter(getContext(), recipeStepsList, this);
         mIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -98,4 +102,10 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
                     + " must implement OnStepClickListener");
         }
     }
+
+    @OnClick(R.id.add_to_widget_button)
+    void addToWidget(View view) {
+        UpdateRecipeService.startRecipeWidgetService(getContext(), ingredientsList, foodItemName);
+    }
+
 }
