@@ -6,7 +6,7 @@ import android.content.Context;
 import android.widget.RemoteViews;
 
 /**
- * Implementation of App Widget functionality.
+ * Created by bapspatil
  */
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
