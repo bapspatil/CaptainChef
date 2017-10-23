@@ -33,20 +33,23 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
         recipeStepsList = foodItem.getRecipeStepArrayList();
         if (isPhone()) {
             mTwoPane = false;
-            StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName);
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .replace(R.id.recipe_container, stepsListFragment)
-                    .commit();
+            if(savedInstanceState == null) {
+                StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName);
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                        .replace(R.id.recipe_container, stepsListFragment)
+                        .commit();
+            }
 
         } else {
             mTwoPane = true;
-            StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName);
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .replace(R.id.recipe_container, stepsListFragment)
-                    .commit();
-
+            if(savedInstanceState == null) {
+                StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName);
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                        .replace(R.id.recipe_container, stepsListFragment)
+                        .commit();
+            }
         }
     }
 

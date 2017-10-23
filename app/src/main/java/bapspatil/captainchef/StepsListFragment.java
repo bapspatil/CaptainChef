@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import bapspatil.captainchef.adapters.IngredientsRecyclerViewAdapter;
-import bapspatil.captainchef.adapters.MyRecyclerView;
 import bapspatil.captainchef.adapters.StepsListRecyclerViewAdapter;
 import bapspatil.captainchef.data.Ingredient;
 import bapspatil.captainchef.data.RecipeStep;
@@ -30,8 +30,8 @@ import es.dmoral.toasty.Toasty;
  */
 public class StepsListFragment extends Fragment implements StepsListRecyclerViewAdapter.OnRecipeStepClickedListener {
     //    private OnStepClickListener mListener;
-    @BindView(R.id.ingredients_rv) MyRecyclerView mIngredientsRecyclerView;
-    @BindView(R.id.steps_rv) MyRecyclerView mStepsRecyclerView;
+    @BindView(R.id.ingredients_rv) RecyclerView mIngredientsRecyclerView;
+    @BindView(R.id.steps_rv) RecyclerView mStepsRecyclerView;
     @BindView(R.id.ingredient_label_tv) TextView mIngredLabelTextView;
     @BindView(R.id.line_view) View lineView;
     @BindView(R.id.steps_label_tv) TextView mStepsLabelTextView;
@@ -43,7 +43,6 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
     private String foodItemName;
     private Unbinder unbinder;
     OnStepClickListener mStepClickListener;
-    private LinearLayoutManager mIngredientsLayoutManager, mStepsLayoutManager;
 
     public StepsListFragment() {
         // Empty constructor
@@ -60,40 +59,43 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_steps_list, container, false);
-        unbinder = ButterKnife.bind(this, rootView);
-
-        mIngredientsLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        mStepsLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-
-        ingredientsList = getArguments().getParcelableArrayList("ingredientsList");
-        recipeStepsList = getArguments().getParcelableArrayList("recipeStepsList");
-        foodItemName = getArguments().getString("foodItemName");
-        mIngredientsAdapter = new IngredientsRecyclerViewAdapter(getContext(), ingredientsList);
-        mStepsListAdapter = new StepsListRecyclerViewAdapter(getContext(), recipeStepsList, this);
-        mIngredientsRecyclerView.setLayoutManager(mIngredientsLayoutManager);
-        mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
-        mStepsRecyclerView.setLayoutManager(mStepsLayoutManager);
-        mStepsRecyclerView.setAdapter(mStepsListAdapter);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @Override
     public void onRecipeStepClicked(RecipeStep recipeStep) {
         mStepClickListener.onStepClicked(recipeStep);
     }
 
     public interface OnStepClickListener {
         void onStepClicked(RecipeStep mRecipeStep);
+    }
+
+    @OnClick(R.id.add_to_widget_button)
+    void addToWidget(View view) {
+        // Start the UpdateRecipeService to update the ingredients list widget in the homescreen
+        UpdateRecipeService.startRecipeWidgetService(getContext(), ingredientsList, foodItemName);
+
+        Toasty.info(getContext(), "Recipe ingredients have been added to homescreen widget!", 5000).show();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_steps_list, container, false);
+        unbinder = ButterKnife.bind(this, rootView);
+
+        ingredientsList = getArguments().getParcelableArrayList("ingredientsList");
+        recipeStepsList = getArguments().getParcelableArrayList("recipeStepsList");
+        foodItemName = getArguments().getString("foodItemName");
+
+        mIngredientsAdapter = new IngredientsRecyclerViewAdapter(getContext(), ingredientsList);
+        mStepsListAdapter = new StepsListRecyclerViewAdapter(getContext(), recipeStepsList, this);
+
+        mIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mStepsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+        mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
+        mStepsRecyclerView.setAdapter(mStepsListAdapter);
+
+        return rootView;
     }
 
     @Override
@@ -110,12 +112,10 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
         }
     }
 
-    @OnClick(R.id.add_to_widget_button)
-    void addToWidget(View view) {
-        // Start the UpdateRecipeService to update the ingredients list widget in the homescreen
-        UpdateRecipeService.startRecipeWidgetService(getContext(), ingredientsList, foodItemName);
 
-        Toasty.info(getContext(), "Recipe ingredients have been added to homescreen widget!", 5000).show();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
-
 }
