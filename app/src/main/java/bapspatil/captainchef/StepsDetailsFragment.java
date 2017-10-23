@@ -49,6 +49,7 @@ public class StepsDetailsFragment extends Fragment {
     private SimpleExoPlayer mPlayer;
     private Unbinder unbinder;
     private RecipeStep recipeStep;
+    private long position = -1;
     private ArrayList<RecipeStep> recipeStepsList;
     OnButtonClickListener mButtonListener;
 
@@ -73,7 +74,8 @@ public class StepsDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_steps_details, container, false);
         unbinder = ButterKnife.bind(this, rootView);
-
+        if (savedInstanceState != null)
+            position = savedInstanceState.getLong("SAVED_POSITION");
         recipeStep = getArguments().getParcelable("recipeStep");
         recipeStepsList = getArguments().getParcelableArrayList("recipeList");
         if (recipeStep != null) {
@@ -95,9 +97,32 @@ public class StepsDetailsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        mPlayer.stop();
-        mPlayer.release();
-        mPlayer = null;
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mPlayer != null) {
+            position = mPlayer.getCurrentPosition();
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mPlayer != null) {
+            if (position != -1) mPlayer.seekTo(position);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong("SAVED_POSITION", position);
     }
 
     @OnClick(R.id.prev_button)
@@ -133,6 +158,8 @@ public class StepsDetailsFragment extends Fragment {
         MediaSource videoSource = new ExtractorMediaSource(Uri.parse(recipeStep.getVideoUrl()),
                 dataSourceFactory, extractorsFactory, null, null);
 // Prepare the player with the source.
+        if (position != -1)
+            mPlayer.seekTo(position);
         mPlayer.prepare(videoSource);
         mPlayer.setPlayWhenReady(true);
     }

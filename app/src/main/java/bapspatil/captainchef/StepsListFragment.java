@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import bapspatil.captainchef.adapters.IngredientsRecyclerViewAdapter;
+import bapspatil.captainchef.adapters.MyRecyclerView;
 import bapspatil.captainchef.adapters.StepsListRecyclerViewAdapter;
 import bapspatil.captainchef.data.Ingredient;
 import bapspatil.captainchef.data.RecipeStep;
@@ -28,10 +28,10 @@ import es.dmoral.toasty.Toasty;
 /**
  * Created by bapspatil
  */
-public class StepsListFragment extends Fragment implements StepsListRecyclerViewAdapter.OnRecipeStepClickedListener{
+public class StepsListFragment extends Fragment implements StepsListRecyclerViewAdapter.OnRecipeStepClickedListener {
     //    private OnStepClickListener mListener;
-    @BindView(R.id.ingredients_rv) RecyclerView mIngredientsRecyclerView;
-    @BindView(R.id.steps_rv) RecyclerView mStepsRecyclerView;
+    @BindView(R.id.ingredients_rv) MyRecyclerView mIngredientsRecyclerView;
+    @BindView(R.id.steps_rv) MyRecyclerView mStepsRecyclerView;
     @BindView(R.id.ingredient_label_tv) TextView mIngredLabelTextView;
     @BindView(R.id.line_view) View lineView;
     @BindView(R.id.steps_label_tv) TextView mStepsLabelTextView;
@@ -43,6 +43,7 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
     private String foodItemName;
     private Unbinder unbinder;
     OnStepClickListener mStepClickListener;
+    private LinearLayoutManager mIngredientsLayoutManager, mStepsLayoutManager;
 
     public StepsListFragment() {
         // Empty constructor
@@ -65,14 +66,17 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
         View rootView = inflater.inflate(R.layout.fragment_steps_list, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
+        mIngredientsLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        mStepsLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
         ingredientsList = getArguments().getParcelableArrayList("ingredientsList");
         recipeStepsList = getArguments().getParcelableArrayList("recipeStepsList");
         foodItemName = getArguments().getString("foodItemName");
         mIngredientsAdapter = new IngredientsRecyclerViewAdapter(getContext(), ingredientsList);
         mStepsListAdapter = new StepsListRecyclerViewAdapter(getContext(), recipeStepsList, this);
-        mIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mIngredientsRecyclerView.setLayoutManager(mIngredientsLayoutManager);
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
-        mStepsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mStepsRecyclerView.setLayoutManager(mStepsLayoutManager);
         mStepsRecyclerView.setAdapter(mStepsListAdapter);
         return rootView;
     }

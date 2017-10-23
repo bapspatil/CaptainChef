@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ import bapspatil.captainchef.data.Ingredient;
 import bapspatil.captainchef.data.RecipeStep;
 import butterknife.ButterKnife;
 
-public class RecipeActivity extends AppCompatActivity implements StepsListFragment.OnStepClickListener {
+public class RecipeActivity extends AppCompatActivity implements StepsListFragment.OnStepClickListener, StepsDetailsFragment.OnButtonClickListener {
 
     private ArrayList<Ingredient> ingredientsList = new ArrayList<>();
     private ArrayList<RecipeStep> recipeStepsList = new ArrayList<>();
@@ -77,5 +78,10 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
     public void onBackPressed() {
         super.onBackPressed();
         RecipeActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
+    public void onButtonClicked(int buttonClicked, RecipeStep recipeStep, ArrayList<RecipeStep> recipeSteps, View view) {
+
     }
 }
