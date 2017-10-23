@@ -95,7 +95,9 @@ public class StepsDetailsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        mPlayer.stop();
         mPlayer.release();
+        mPlayer = null;
     }
 
     @OnClick(R.id.prev_button)

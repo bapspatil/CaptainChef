@@ -24,8 +24,11 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget_provider);
+
+        // Setting the Food Item name
         views.setTextViewText(R.id.appwidget_food_item_title, foodItemName);
 
+        // Setting the RemoteAdapter for the list view of Ingredients
         Intent intentForListView = new Intent(context, RecipeWidgetRemoteViewsService.class);
         views.setRemoteAdapter(R.id.widget_ingredients_list_view, intentForListView);
 
@@ -58,13 +61,22 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // Get the AppWidgetManager & appWidgetIds from the context
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, RecipeWidgetProvider.class));
+
+        // Get the action present in the Intent passed by the UpdateRecipeService
         final String action = intent.getAction();
         if (action.equals("android.appwidget.action.RECIPE_UPDATE")) {
+
+            // Get the extras from the Intent obtained from the UpdateRecipeService
             ingredientArrayList = intent.getParcelableArrayListExtra("ingredientsList");
             foodItemName = intent.getStringExtra("foodItemName");
+
+            // Notify the AppWidgetManager that the data in the widget has changed
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_ingredients_list_view);
+
+            // Update the data displayed in the widget
             updateRecipeWidgets(context, appWidgetManager, appWidgetIds);
             super.onReceive(context, intent);
         }

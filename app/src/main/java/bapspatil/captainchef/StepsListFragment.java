@@ -108,7 +108,9 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
 
     @OnClick(R.id.add_to_widget_button)
     void addToWidget(View view) {
+        // Start the UpdateRecipeService to update the ingredients list widget in the homescreen
         UpdateRecipeService.startRecipeWidgetService(getContext(), ingredientsList, foodItemName);
+
         Toasty.info(getContext(), "Recipe ingredients have been added to homescreen widget!", 5000).show();
     }
 
