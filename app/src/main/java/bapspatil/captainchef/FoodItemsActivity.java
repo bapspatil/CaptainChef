@@ -93,7 +93,7 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
             @Override
             public String loadInBackground() {
                 try {
-                    return loadMainJson(new URL("http://go.udacity.com/android-baking-app-json"));
+                    return loadMainJson(new URL("https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json"));
                 } catch (IOException e) {
                     e.printStackTrace();
                     return null;
