@@ -11,7 +11,7 @@ import android.util.AttributeSet;
  * Created by bapspatil
  */
 
-public class MyRecyclerView extends RecyclerView {
+public final class MyRecyclerView extends RecyclerView {
     private static final String SAVED_SUPER_STATE = "super-state";
     private static final String SAVED_LAYOUT_MANAGER = "layout-manager-state";
     private Parcelable mLayoutManagerSavedState;

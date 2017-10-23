@@ -93,7 +93,9 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
         mStepsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
+        mIngredientsRecyclerView.setHasFixedSize(true);
         mStepsRecyclerView.setAdapter(mStepsListAdapter);
+        mStepsRecyclerView.setHasFixedSize(true);
 
         return rootView;
     }
@@ -112,10 +114,29 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
         }
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    /*@Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray("SCROLL_POSITION",
+                new int[]{ nestedScrollView.getScrollX(), nestedScrollView.getScrollY()});
+    }*/
+
+    /*@Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final int[] position = savedInstanceState.getIntArray("SCROLL_POSITION");
+        if(position != null)
+            nestedScrollView.post(new Runnable() {
+                public void run() {
+                    nestedScrollView.scrollTo(position[0], position[1]);
+                }
+            });
+    }*/
+
 }
