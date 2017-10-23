@@ -15,4 +15,5 @@
     <string name="empty_view">Empty view</string>
     <string name="add_ingredients_list_to_widget">Add ingredients list to widget</string>
     <string name="choose_a_food_item_from_the_app">Choose a food item from the app</string>
+    <string name="recipe_item_image_view">Recipe Item Image View</string>
 </resources>

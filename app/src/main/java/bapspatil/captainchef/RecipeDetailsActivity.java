@@ -23,12 +23,14 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsDet
         ButterKnife.bind(this);
         mRecipeStep = getIntent().getParcelableExtra("recipeStep");
         mRecipeStepsList = getIntent().getParcelableArrayListExtra("recipeList");
-        StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep, mRecipeStepsList);
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .replace(R.id.recipe_details_container, stepsDetailsFragment)
-                .commit();
+        if(savedInstanceState == null) {
+            StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep, mRecipeStepsList);
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    .replace(R.id.recipe_details_container, stepsDetailsFragment)
+                    .commit();
+        }
     }
 
     @Override

@@ -118,6 +118,7 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
                 FoodItem foodItem = new FoodItem();
                 foodItem.setFoodId(jsonFoodItem.getInt("id"));
                 foodItem.setFoodName(jsonFoodItem.getString("name"));
+                foodItem.setImageUrl(jsonFoodItem.getString("image"));
                 JSONArray jsonIngredientArray = jsonFoodItem.getJSONArray("ingredients");
                 ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
                 for (int j = 0; j < jsonIngredientArray.length(); j++) {

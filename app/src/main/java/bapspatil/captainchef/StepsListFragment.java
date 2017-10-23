@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import bapspatil.captainchef.adapters.IngredientsRecyclerViewAdapter;
+import bapspatil.captainchef.adapters.MyRecyclerView;
 import bapspatil.captainchef.adapters.StepsListRecyclerViewAdapter;
 import bapspatil.captainchef.data.Ingredient;
 import bapspatil.captainchef.data.RecipeStep;
@@ -30,8 +30,8 @@ import es.dmoral.toasty.Toasty;
  */
 public class StepsListFragment extends Fragment implements StepsListRecyclerViewAdapter.OnRecipeStepClickedListener {
     //    private OnStepClickListener mListener;
-    @BindView(R.id.ingredients_rv) RecyclerView mIngredientsRecyclerView;
-    @BindView(R.id.steps_rv) RecyclerView mStepsRecyclerView;
+    @BindView(R.id.ingredients_rv) MyRecyclerView mIngredientsRecyclerView;
+    @BindView(R.id.steps_rv) MyRecyclerView mStepsRecyclerView;
     @BindView(R.id.ingredient_label_tv) TextView mIngredLabelTextView;
     @BindView(R.id.line_view) View lineView;
     @BindView(R.id.steps_label_tv) TextView mStepsLabelTextView;

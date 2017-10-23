@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import bapspatil.captainchef.R;
@@ -42,11 +44,42 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
         FoodItem foodItem = mFoodItemsList.get(position);
         holder.mFoodItemTextView.setText(foodItem.getFoodName());
         String foodName = foodItem.getFoodName();
+        Glide.with(mContext)
+                .load(foodItem.getImageUrl())
+                .centerCrop()
+                .fallback(R.drawable.fallback_recipe_thumbnail)
+                .error(R.drawable.fallback_recipe_thumbnail)
+                .placeholder(R.drawable.fallback_recipe_thumbnail)
+                .into(holder.mFoodItemImageView);
         switch (foodName) {
-            case "Nutella Pie": holder.mFoodItemImageView.setImageResource(R.drawable.nutella_pie); break;
-            case "Brownies": holder.mFoodItemImageView.setImageResource(R.drawable.brownie); break;
-            case "Yellow Cake": holder.mFoodItemImageView.setImageResource(R.drawable.yellow_cake); break;
-            case "Cheesecake": holder.mFoodItemImageView.setImageResource(R.drawable.cheesecake); break;
+            case "Nutella Pie": Glide.with(mContext)
+                    .load(foodItem.getImageUrl())
+                    .centerCrop()
+                    .fallback(R.drawable.nutella_pie)
+                    .error(R.drawable.nutella_pie)
+                    .placeholder(R.drawable.nutella_pie)
+                    .into(holder.mFoodItemImageView); break;
+            case "Brownies": Glide.with(mContext)
+                    .load(foodItem.getImageUrl())
+                    .centerCrop()
+                    .fallback(R.drawable.brownie)
+                    .error(R.drawable.brownie)
+                    .placeholder(R.drawable.brownie)
+                    .into(holder.mFoodItemImageView); break;
+            case "Yellow Cake": Glide.with(mContext)
+                    .load(foodItem.getImageUrl())
+                    .centerCrop()
+                    .fallback(R.drawable.yellow_cake)
+                    .error(R.drawable.yellow_cake)
+                    .placeholder(R.drawable.yellow_cake)
+                    .into(holder.mFoodItemImageView); break;
+            case "Cheesecake": Glide.with(mContext)
+                    .load(foodItem.getImageUrl())
+                    .centerCrop()
+                    .fallback(R.drawable.cheesecake)
+                    .error(R.drawable.cheesecake)
+                    .placeholder(R.drawable.cheesecake)
+                    .into(holder.mFoodItemImageView); break;
         }
     }
 

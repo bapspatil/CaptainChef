@@ -30,7 +30,7 @@
             android:layout_marginStart="12dp"
             android:background="@color/colorPrimaryDark"/>
 
-        <android.support.v7.widget.RecyclerView
+        <bapspatil.captainchef.adapters.MyRecyclerView
             android:id="@+id/ingredients_rv"
             android:layout_width="match_parent"
             android:nestedScrollingEnabled="false"
@@ -48,7 +48,7 @@
             android:text="@string/steps"
             android:textColor="@color/colorPrimary"/>
 
-        <android.support.v7.widget.RecyclerView
+        <bapspatil.captainchef.adapters.MyRecyclerView
             android:id="@+id/steps_rv"
             android:nestedScrollingEnabled="false"
             android:layout_width="match_parent"

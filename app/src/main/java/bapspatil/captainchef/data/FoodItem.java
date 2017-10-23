@@ -7,7 +7,16 @@ import java.util.ArrayList;
 
 public class FoodItem implements Parcelable {
     private int foodId;
-    private String foodName;
+    private String foodName, imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     private ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
     private ArrayList<RecipeStep> recipeStepArrayList = new ArrayList<>();
 

@@ -10,26 +10,22 @@
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/step_number_tv"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        tools:text="1"/>
+    <ImageView
+        android:id="@+id/step_item_iv"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:contentDescription="@string/recipe_item_image_view"
+        android:scaleType="centerCrop"/>
 
     <TextView
-        android:id="@+id/step_tv"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:layout_width="wrap_content"
+        android:id="@+id/step_item_tv"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|center_vertical"
-        android:layout_marginStart="44dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="15sp"
-        tools:text="Remove from oven and cool at room temperature."/>
+        android:layout_gravity="bottom"
+        android:background="#C0000000"
+        android:padding="16dp"
+        android:textColor="#FFF"
+        tools:text="0. Recipe Introduction"/>
 
 </android.support.v7.widget.CardView>

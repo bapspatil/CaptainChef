@@ -50,6 +50,7 @@ public class StepsDetailsFragment extends Fragment {
     private Unbinder unbinder;
     private RecipeStep recipeStep;
     private long position = -1;
+    private Uri videoUri;
     private ArrayList<RecipeStep> recipeStepsList;
     OnButtonClickListener mButtonListener;
 
@@ -155,7 +156,8 @@ public class StepsDetailsFragment extends Fragment {
 // Produces Extractor instances for parsing the media data.
         ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
 // This is the MediaSource representing the media to be played.
-        MediaSource videoSource = new ExtractorMediaSource(Uri.parse(recipeStep.getVideoUrl()),
+        videoUri = Uri.parse(recipeStep.getVideoUrl());
+        MediaSource videoSource = new ExtractorMediaSource(videoUri,
                 dataSourceFactory, extractorsFactory, null, null);
 // Prepare the player with the source.
         if (position != -1)
