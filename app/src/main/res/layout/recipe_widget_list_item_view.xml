@@ -10,8 +10,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:textAllCaps="true"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         tools:text="Hi this is an ingredient"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/empty_view"/>
 
 </LinearLayout>
