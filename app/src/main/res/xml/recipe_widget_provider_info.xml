@@ -7,5 +7,5 @@
                     android:previewImage="@drawable/recipe_widget_preview"
                     android:resizeMode="horizontal|vertical"
                     android:updatePeriodMillis="0"
-                    android:widgetCategory="home_screen">
+                    android:widgetCategory="home_screen">0
 </appwidget-provider>

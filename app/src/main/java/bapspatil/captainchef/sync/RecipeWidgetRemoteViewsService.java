@@ -59,7 +59,7 @@ public class RecipeWidgetRemoteViewsService extends RemoteViewsService {
         @Override
         public RemoteViews getViewAt(int i) {
             RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.recipe_widget_list_item_view);
-            views.setTextViewText(R.id.widget_ingredients_text_view, remoteIngredientsList.get(i).getIngredientName() + "\n\t\t\tQuantity: " + remoteIngredientsList.get(i).getQuant() + "\n\t\t\tMeasure: " + remoteIngredientsList.get(i).getMeasuredWith());
+            views.setTextViewText(R.id.widget_ingredients_text_view, remoteIngredientsList.get(i).getIngredientName() + "\n\t\t\tQuantity: " + remoteIngredientsList.get(i).getQuant() + " " + remoteIngredientsList.get(i).getMeasuredWith());
             return views;
         }
 
