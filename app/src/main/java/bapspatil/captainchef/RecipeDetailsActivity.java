@@ -55,18 +55,8 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsDet
     public void onButtonClicked(int buttonClicked, RecipeStep recipeStep, ArrayList<RecipeStep> recipeSteps, View view) {
         if (buttonClicked == StepsDetailsFragment.PREV_BUTTON) {
             int id = recipeStep.getStepId();
-            if (id != 0) {
-                view.setVisibility(View.VISIBLE);
-                id--;
-            } else {
-                view.setVisibility(View.INVISIBLE);
-                return;
-            }
+            id--;
             RecipeStep prevRecipeStep = recipeSteps.get(id);
-            while (prevRecipeStep == null) {
-                id--;
-                prevRecipeStep = recipeSteps.get(id);
-            }
             StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(prevRecipeStep, mRecipeStepsList);
             fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
@@ -75,18 +65,8 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsDet
                     .commit();
         } else {
             int id = recipeStep.getStepId();
-            if (id != (recipeSteps.size() - 1)) {
-                view.setVisibility(View.VISIBLE);
-                id++;
-            } else {
-                view.setVisibility(View.INVISIBLE);
-                return;
-            }
+            id++;
             RecipeStep nextRecipeStep = recipeSteps.get(id);
-            while (nextRecipeStep == null) {
-                id++;
-                nextRecipeStep = recipeSteps.get(id);
-            }
             StepsDetailsFragment stepsDetailsFragment = StepsDetailsFragment.newInstance(nextRecipeStep, mRecipeStepsList);
             fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()

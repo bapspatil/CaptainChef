@@ -18,10 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import bapspatil.captainchef.adapters.FoodItemsRecyclerViewAdapter;
 import bapspatil.captainchef.data.FoodItem;
@@ -55,24 +52,20 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
         getSupportLoaderManager().initLoader(FOOD_ITEMS_LOADER_ID, null, this);
     }
 
-    public String loadMainJson(URL url) throws IOException {
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+    public String loadMainJson() {
+        String json;
         try {
-            InputStream in = urlConnection.getInputStream();
-
-            Scanner scanner = new Scanner(in);
-            scanner.useDelimiter("\\A");
-
-            boolean hasInput = scanner.hasNext();
-            String response = null;
-            if (hasInput) {
-                response = scanner.next();
-            }
-            scanner.close();
-            return response;
-        } finally {
-            urlConnection.disconnect();
+            InputStream is = getApplicationContext().getResources().openRawResource(R.raw.baking);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
         }
+        return json;
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -92,12 +85,7 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
 
             @Override
             public String loadInBackground() {
-                try {
-                    return loadMainJson(new URL("https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return null;
-                }
+                return loadMainJson();
             }
 
             @Override
