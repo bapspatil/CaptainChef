@@ -21,6 +21,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsDet
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
         ButterKnife.bind(this);
+
         mRecipeStep = getIntent().getParcelableExtra("recipeStep");
         mRecipeStepsList = getIntent().getParcelableArrayListExtra("recipeList");
         fragmentManager = getSupportFragmentManager();
@@ -81,4 +82,5 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsDet
         super.onBackPressed();
         RecipeDetailsActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
+
 }

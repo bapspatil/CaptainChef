@@ -7,11 +7,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 
 import bapspatil.captainchef.data.FoodItem;
 import bapspatil.captainchef.data.Ingredient;
 import bapspatil.captainchef.data.RecipeStep;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipeActivity extends AppCompatActivity implements StepsListFragment.OnStepClickListener, StepsDetailsFragment.OnButtonClickListener {
@@ -20,12 +24,17 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
     private ArrayList<RecipeStep> recipeStepsList = new ArrayList<>();
     FragmentManager fragmentManager;
     private boolean mTwoPane;
+    @BindView(R.id.ad_recipes_list) AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         ButterKnife.bind(this);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         fragmentManager = getSupportFragmentManager();
         FoodItem foodItem = getIntent().getParcelableExtra("foodItem");
         String foodItemName = foodItem.getFoodName();
@@ -33,7 +42,7 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
         recipeStepsList = foodItem.getRecipeStepArrayList();
         if (isPhone()) {
             mTwoPane = false;
-            if(savedInstanceState == null) {
+            if (savedInstanceState == null) {
                 StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName);
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -43,7 +52,7 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
 
         } else {
             mTwoPane = true;
-            if(savedInstanceState == null) {
+            if (savedInstanceState == null) {
                 StepsListFragment stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName);
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -60,7 +69,7 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
 
     @Override
     public void onStepClicked(RecipeStep mRecipeStep) {
-        if(!mTwoPane) {
+        if (!mTwoPane) {
             Intent startRecipeDetailsActivity = new Intent(this, RecipeDetailsActivity.class);
             startRecipeDetailsActivity.putExtra("recipeStep", mRecipeStep);
             startRecipeDetailsActivity.putParcelableArrayListExtra("recipeList", recipeStepsList);
@@ -86,5 +95,26 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
     @Override
     public void onButtonClicked(int buttonClicked, RecipeStep recipeStep, ArrayList<RecipeStep> recipeSteps, View view) {
 
+    }
+
+    @Override
+    protected void onPause() {
+        if (adView != null)
+            adView.pause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adView != null)
+            adView.resume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null)
+            adView.destroy();
+        super.onDestroy();
     }
 }

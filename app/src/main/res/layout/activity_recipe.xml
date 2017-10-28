@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,6 +18,14 @@
             android:id="@+id/recipe_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/ad_recipes_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-7016904234275449/2200829261"/>
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
