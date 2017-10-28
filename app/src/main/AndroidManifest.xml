@@ -15,11 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".FoodItemsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".RecipeActivity">
         </activity>
@@ -39,9 +34,19 @@
 
         <service
             android:name=".sync.RecipeWidgetRemoteViewsService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
         <service android:name=".sync.UpdateRecipeService"/>
+
+        <activity
+            android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
