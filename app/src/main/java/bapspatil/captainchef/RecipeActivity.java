@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -25,19 +27,27 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
     FragmentManager fragmentManager;
     private boolean mTwoPane;
     @BindView(R.id.ad_recipes_list) AdView adView;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.recipe_toolbar_tv) TextView recipeToolbarTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         ButterKnife.bind(this);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
         fragmentManager = getSupportFragmentManager();
+
         FoodItem foodItem = getIntent().getParcelableExtra("foodItem");
         String foodItemName = foodItem.getFoodName();
+
+        recipeToolbarTextView.setText(foodItemName);
+
         ingredientsList = foodItem.getIngredientArrayList();
         recipeStepsList = foodItem.getRecipeStepArrayList();
         if (isPhone()) {

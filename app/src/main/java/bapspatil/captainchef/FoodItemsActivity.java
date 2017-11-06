@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -37,12 +38,15 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
     private FoodItemsRecyclerViewAdapter mAdapter;
     @BindView(R.id.food_items_rv) RecyclerView mFoodItemsRecyclerView;
     @BindView(R.id.ad_food_items) AdView adView;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_items);
         ButterKnife.bind(this);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
         Toasty.info(getApplicationContext(), "App developed by Bapusaheb Patil", 5000).show();
 
         AdRequest adRequest = new AdRequest.Builder().build();

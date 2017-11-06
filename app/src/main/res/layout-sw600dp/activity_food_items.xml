@@ -8,6 +8,27 @@
     android:orientation="vertical"
     tools:context="bapspatil.captainchef.FoodItemsActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@color/white"/>
+        </FrameLayout>
+    </android.support.v7.widget.Toolbar>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/food_items_rv"
         android:layout_width="match_parent"

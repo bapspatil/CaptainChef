@@ -14,6 +14,31 @@
         android:orientation="vertical"
         tools:context="bapspatil.captainchef.RecipeActivity">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="?attr/colorPrimary"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/recipe_toolbar_tv"
+                    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"/>
+            </FrameLayout>
+        </android.support.v7.widget.Toolbar>
+
         <android.support.design.widget.CoordinatorLayout
             android:id="@+id/recipe_container"
             android:layout_width="match_parent"
