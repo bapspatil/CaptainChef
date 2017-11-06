@@ -94,12 +94,12 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
         @Override
         public void onClick(View v) {
             if(mClickListener != null)
-                mClickListener.onFoodItemClicked(getAdapterPosition());
+                mClickListener.onFoodItemClicked(getAdapterPosition(), mFoodItemTextView);
         }
     }
 
     public interface OnFoodItemClickListener {
-        void onFoodItemClicked(int position);
+        void onFoodItemClicked(int position, TextView textView);
     }
 
 }

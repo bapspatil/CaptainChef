@@ -28,6 +28,7 @@
         android:background="#C0000000"
         android:padding="16dp"
         android:textColor="#FFF"
+        android:transitionName="@string/food_item_name_transition"
         tools:text="Cheese Cake"/>
 
 </android.support.v7.widget.CardView>

@@ -12,6 +12,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -161,13 +162,13 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
     }
 
     @Override
-    public void onFoodItemClicked(int position) {
+    public void onFoodItemClicked(int position, TextView textView) {
         Toasty.info(getApplicationContext(), "This recipe serves 8 people", 5000).show();
         FoodItem foodItem = foodItemsList.get(position);
         Intent startRecipeActivity = new Intent(this, RecipeActivity.class);
         startRecipeActivity.putExtra("foodItem", foodItem);
         ActivityOptions options =
-                ActivityOptions.makeCustomAnimation(getApplicationContext(), android.R.anim.fade_in, android.R.anim.fade_out);
+                ActivityOptions.makeCustomAnimation(this, android.R.anim.fade_in, android.R.anim.fade_out);
         startActivity(startRecipeActivity, options.toBundle());
     }
 
