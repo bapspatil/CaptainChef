@@ -1,5 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="bapspatil.captainchef.StepsDetailsFragment">
@@ -48,27 +49,24 @@
             android:orientation="horizontal">
 
             <android.support.v7.widget.CardView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/prev_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:id="@+id/prev_card_view"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:onClick="prevStep"
-                app:cardBackgroundColor="@color/colorPrimary"
                 android:orientation="horizontal"
+                app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp">
 
-                <TextView
-                    android:id="@+id/textView"
+                <Button
+                    android:id="@+id/prev_button"
                     style="@style/TextAppearance.AppCompat.Subhead"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
+                    android:background="?android:selectableItemBackground"
+                    android:onClick="prevStep"
                     android:text="@string/prev_step"
                     android:textColor="#FFF"
                     android:textSize="15sp"/>
@@ -79,23 +77,24 @@
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/next_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/colorPrimary"
+                android:id="@+id/next_card_view"
                 android:layout_weight="1"
-                android:onClick="nextStep"
                 android:orientation="horizontal"
+                app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp">
 
-                <TextView
+                <Button
                     style="@style/TextAppearance.AppCompat.Subhead"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/next_button"
                     android:layout_gravity="center"
-                    android:layout_margin="16dp"
+                    android:background="?android:selectableItemBackground"
+                    android:onClick="nextStep"
                     android:text="@string/next_step"
                     android:textColor="#FFF"
                     android:textSize="15sp"/>

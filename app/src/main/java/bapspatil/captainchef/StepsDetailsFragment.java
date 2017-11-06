@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -46,8 +47,10 @@ import butterknife.Unbinder;
 public class StepsDetailsFragment extends Fragment {
     @BindView(R.id.step_description_tv) TextView mStepDescription;
     @BindView(R.id.video_exoplayer_view) SimpleExoPlayerView mPlayerView;
-    @BindView(R.id.next_button) CardView nextButton;
-    @BindView(R.id.prev_button) CardView prevButton;
+    @BindView(R.id.next_button) Button nextButton;
+    @BindView(R.id.prev_button) Button prevButton;
+    @BindView(R.id.next_card_view) CardView nextCardView;
+    @BindView(R.id.prev_card_view) CardView prevCardView;
     @BindView(R.id.ad_details_list) AdView adView;
     private SimpleExoPlayer mPlayer;
     private Unbinder unbinder;
@@ -91,11 +94,15 @@ public class StepsDetailsFragment extends Fragment {
             getPlayer();
             if (recipeStep.getStepId() == 0) {
                 prevButton.setVisibility(View.INVISIBLE);
+                prevCardView.setVisibility(View.INVISIBLE);
             } else if (recipeStep.getStepId() == (recipeStepsList.size() - 1)) {
                 nextButton.setVisibility(View.INVISIBLE);
+                nextCardView.setVisibility(View.INVISIBLE);
             } else {
                 prevButton.setVisibility(View.VISIBLE);
                 nextButton.setVisibility(View.VISIBLE);
+                prevCardView.setVisibility(View.VISIBLE);
+                nextCardView.setVisibility(View.VISIBLE);
             }
         }
         return rootView;
@@ -186,9 +193,6 @@ public class StepsDetailsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        // This makes sure that the host activity has implemented the callback interface
-        // If not, it throws an exception
         try {
             mButtonListener = (OnButtonClickListener) context;
         } catch (ClassCastException e) {

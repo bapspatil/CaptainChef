@@ -44,13 +44,6 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
         FoodItem foodItem = mFoodItemsList.get(position);
         holder.mFoodItemTextView.setText(foodItem.getFoodName());
         String foodName = foodItem.getFoodName();
-        Glide.with(mContext)
-                .load(foodItem.getImageUrl())
-                .centerCrop()
-                .fallback(R.drawable.fallback_recipe_thumbnail)
-                .error(R.drawable.fallback_recipe_thumbnail)
-                .placeholder(R.drawable.fallback_recipe_thumbnail)
-                .into(holder.mFoodItemImageView);
         switch (foodName) {
             case "Nutella Pie": Glide.with(mContext)
                     .load(foodItem.getImageUrl())
