@@ -85,7 +85,11 @@ public class StepsDetailsFragment extends Fragment {
         recipeStepsList = getArguments().getParcelableArrayList("recipeList");
         if (recipeStep != null) {
             mStepDescription.setText(recipeStep.getInfo());
-            getPlayer();
+            if(recipeStep.getVideoUrl().equals("") || recipeStep.getVideoUrl() == null) {
+                mPlayerView.setVisibility(View.GONE);
+            } else {
+                getPlayer();
+            }
             if (recipeStep.getStepId() == 0) {
                 prevButton.setVisibility(View.INVISIBLE);
                 prevCardView.setVisibility(View.INVISIBLE);

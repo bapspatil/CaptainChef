@@ -1,10 +1,6 @@
 package bapspatil.captainchef.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +25,6 @@ public class StepsListRecyclerViewAdapter extends RecyclerView.Adapter<StepsList
     private Context mContext;
     private ArrayList<RecipeStep> mRecipeStepsList;
     private OnRecipeStepClickedListener mClickListener;
-    private Bitmap mBitmap;
 
     public StepsListRecyclerViewAdapter(Context context, ArrayList<RecipeStep> recipeStepArrayList, OnRecipeStepClickedListener clickedListener) {
         mContext = context;
@@ -49,9 +44,8 @@ public class StepsListRecyclerViewAdapter extends RecyclerView.Adapter<StepsList
         String recipeStepString = recipeStep.getStepId() + ". " + recipeStep.getShortInfo();
         stepsListViewHolder.mStepTextView.setText(recipeStepString);
 
-        (new LoadThumbnailsTask()).execute(recipeStep.getVideoUrl());
         Glide.with(mContext)
-                .load(mBitmap)
+                .load(recipeStep.getThumbnailUrl())
                 .centerCrop()
                 .fallback(R.drawable.fallback_recipe_thumbnail)
                 .error(R.drawable.fallback_recipe_thumbnail)
@@ -86,36 +80,4 @@ public class StepsListRecyclerViewAdapter extends RecyclerView.Adapter<StepsList
         void onRecipeStepClicked(RecipeStep recipeStep);
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class LoadThumbnailsTask extends AsyncTask<String, Void, Bitmap> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            Bitmap bitmap = null;
-            String videoPath = strings[0];
-            MediaMetadataRetriever mediaMetadataRetriever = null;
-            try {
-                mediaMetadataRetriever = new MediaMetadataRetriever();
-                mediaMetadataRetriever.setDataSource(videoPath);
-                bitmap = mediaMetadataRetriever.getFrameAtTime();
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            } finally {
-                if (mediaMetadataRetriever != null)
-                    mediaMetadataRetriever.release();
-            }
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            mBitmap = bitmap;
-        }
-    }
 }
