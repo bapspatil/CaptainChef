@@ -14,9 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +35,6 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
     private static final int FOOD_ITEMS_LOADER_ID = 13;
     private FoodItemsRecyclerViewAdapter mAdapter;
     @BindView(R.id.food_items_rv) RecyclerView mFoodItemsRecyclerView;
-    @BindView(R.id.ad_food_items) AdView adView;
     @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
@@ -49,9 +45,6 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Toasty.info(getApplicationContext(), "App developed by Bapusaheb Patil", 5000).show();
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
 
         if (isPhone())
             mFoodItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -172,24 +165,4 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
         startActivity(startRecipeActivity, options.toBundle());
     }
 
-    @Override
-    protected void onPause() {
-        if(adView != null)
-            adView.pause();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(adView != null)
-            adView.resume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if(adView != null)
-            adView.destroy();
-        super.onDestroy();
-    }
 }

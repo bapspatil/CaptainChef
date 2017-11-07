@@ -9,9 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import java.util.ArrayList;
 
 import bapspatil.captainchef.data.FoodItem;
@@ -26,7 +23,6 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
     private ArrayList<RecipeStep> recipeStepsList = new ArrayList<>();
     FragmentManager fragmentManager;
     private boolean mTwoPane;
-    @BindView(R.id.ad_recipes_list) AdView adView;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.recipe_toolbar_tv) TextView recipeToolbarTextView;
 
@@ -37,9 +33,6 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
         ButterKnife.bind(this);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -107,24 +100,4 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
 
     }
 
-    @Override
-    protected void onPause() {
-        if (adView != null)
-            adView.pause();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (adView != null)
-            adView.resume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (adView != null)
-            adView.destroy();
-        super.onDestroy();
-    }
 }

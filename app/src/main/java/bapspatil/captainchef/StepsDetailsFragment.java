@@ -29,8 +29,6 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 
@@ -51,7 +49,6 @@ public class StepsDetailsFragment extends Fragment {
     @BindView(R.id.prev_button) Button prevButton;
     @BindView(R.id.next_card_view) CardView nextCardView;
     @BindView(R.id.prev_card_view) CardView prevCardView;
-    @BindView(R.id.ad_details_list) AdView adView;
     private SimpleExoPlayer mPlayer;
     private Unbinder unbinder;
     private RecipeStep recipeStep;
@@ -82,9 +79,6 @@ public class StepsDetailsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_steps_details, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
-
         if (savedInstanceState != null)
             position = savedInstanceState.getLong("SAVED_POSITION");
         recipeStep = getArguments().getParcelable("recipeStep");
@@ -112,8 +106,6 @@ public class StepsDetailsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        if(adView != null)
-            adView.destroy();
     }
 
 
@@ -126,8 +118,6 @@ public class StepsDetailsFragment extends Fragment {
             mPlayer.release();
             mPlayer = null;
         }
-        if(adView != null)
-            adView.pause();
     }
 
     @Override
@@ -136,8 +126,6 @@ public class StepsDetailsFragment extends Fragment {
         if (mPlayer != null) {
             if (position != -1) mPlayer.seekTo(position);
         }
-        if(adView != null)
-            adView.resume();
     }
 
     @Override
