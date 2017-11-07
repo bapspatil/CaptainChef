@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 import bapspatil.captainchef.R;
 import bapspatil.captainchef.data.RecipeStep;
+import bapspatil.captainchef.glide.GlideApp;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -35,9 +34,7 @@ public class StepsListRecyclerViewAdapter extends RecyclerView.Adapter<StepsList
     @Override
     public StepsListViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.rv_steps_list, viewGroup, false);
-        RecipeStep recipeStep = mRecipeStepsList.get(i);
-        StepsListViewHolder viewHolder = new StepsListViewHolder(view);
-        return viewHolder;
+        return new StepsListViewHolder(view);
     }
 
     @Override
@@ -45,12 +42,12 @@ public class StepsListRecyclerViewAdapter extends RecyclerView.Adapter<StepsList
         RecipeStep recipeStep = mRecipeStepsList.get(i);
         String recipeStepString = recipeStep.getStepId() + ". " + recipeStep.getShortInfo();
         stepsListViewHolder.mStepTextView.setText(recipeStepString);
-
-        Glide.with(mContext)
+        GlideApp.with(mContext)
                 .load(recipeStep.getThumbnailUrl())
                 .centerCrop()
                 .fallback(R.drawable.fallback_recipe_thumbnail)
                 .error(R.drawable.fallback_recipe_thumbnail)
+                .placeholder(R.drawable.fallback_recipe_thumbnail)
                 .into(stepsListViewHolder.mStepImageView);
     }
 

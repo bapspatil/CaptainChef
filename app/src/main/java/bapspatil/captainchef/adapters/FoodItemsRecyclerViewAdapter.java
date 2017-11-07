@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 import bapspatil.captainchef.R;
 import bapspatil.captainchef.data.FoodItem;
+import bapspatil.captainchef.glide.GlideApp;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -45,34 +44,42 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
         holder.mFoodItemTextView.setText(foodItem.getFoodName());
         String foodName = foodItem.getFoodName();
         switch (foodName) {
-            case "Nutella Pie": Glide.with(mContext)
-                    .load(foodItem.getImageUrl())
-                    .centerCrop()
-                    .fallback(R.drawable.nutella_pie)
-                    .error(R.drawable.nutella_pie)
-                    .placeholder(R.drawable.nutella_pie)
-                    .into(holder.mFoodItemImageView); break;
-            case "Brownies": Glide.with(mContext)
-                    .load(foodItem.getImageUrl())
-                    .centerCrop()
-                    .fallback(R.drawable.brownie)
-                    .error(R.drawable.brownie)
-                    .placeholder(R.drawable.brownie)
-                    .into(holder.mFoodItemImageView); break;
-            case "Yellow Cake": Glide.with(mContext)
-                    .load(foodItem.getImageUrl())
-                    .centerCrop()
-                    .fallback(R.drawable.yellow_cake)
-                    .error(R.drawable.yellow_cake)
-                    .placeholder(R.drawable.yellow_cake)
-                    .into(holder.mFoodItemImageView); break;
-            case "Cheesecake": Glide.with(mContext)
-                    .load(foodItem.getImageUrl())
-                    .centerCrop()
-                    .fallback(R.drawable.cheesecake)
-                    .error(R.drawable.cheesecake)
-                    .placeholder(R.drawable.cheesecake)
-                    .into(holder.mFoodItemImageView); break;
+            case "Nutella Pie":
+                GlideApp.with(mContext)
+                        .load(foodItem.getImageUrl())
+                        .centerCrop()
+                        .fallback(R.drawable.nutella_pie)
+                        .error(R.drawable.nutella_pie)
+                        .placeholder(R.drawable.nutella_pie)
+                        .into(holder.mFoodItemImageView);
+                break;
+            case "Brownies":
+                GlideApp.with(mContext)
+                        .load(foodItem.getImageUrl())
+                        .centerCrop()
+                        .fallback(R.drawable.brownie)
+                        .error(R.drawable.brownie)
+                        .placeholder(R.drawable.brownie)
+                        .into(holder.mFoodItemImageView);
+                break;
+            case "Yellow Cake":
+                GlideApp.with(mContext)
+                        .load(foodItem.getImageUrl())
+                        .centerCrop()
+                        .fallback(R.drawable.yellow_cake)
+                        .error(R.drawable.yellow_cake)
+                        .placeholder(R.drawable.yellow_cake)
+                        .into(holder.mFoodItemImageView);
+                break;
+            case "Cheesecake":
+                GlideApp.with(mContext)
+                        .load(foodItem.getImageUrl())
+                        .centerCrop()
+                        .fallback(R.drawable.cheesecake)
+                        .error(R.drawable.cheesecake)
+                        .placeholder(R.drawable.cheesecake)
+                        .into(holder.mFoodItemImageView);
+                break;
         }
     }
 
@@ -81,7 +88,7 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
         return mFoodItemsList.size();
     }
 
-    class FoodItemsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class FoodItemsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.food_item_tv) TextView mFoodItemTextView;
         @BindView(R.id.food_item_iv) ImageView mFoodItemImageView;
 
@@ -93,7 +100,7 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
 
         @Override
         public void onClick(View v) {
-            if(mClickListener != null)
+            if (mClickListener != null)
                 mClickListener.onFoodItemClicked(getAdapterPosition(), mFoodItemTextView);
         }
     }
