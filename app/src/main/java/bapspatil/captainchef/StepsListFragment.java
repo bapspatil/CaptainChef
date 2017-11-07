@@ -90,7 +90,11 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
         mStepsListAdapter = new StepsListRecyclerViewAdapter(getContext(), recipeStepsList, this);
 
         mIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        mStepsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
+        // TODO Remove this if you're still not able to work out the non-loading of steps
+        linearLayoutManager.setAutoMeasureEnabled(false);
+        mStepsRecyclerView.setLayoutManager(linearLayoutManager);
 
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
         mIngredientsRecyclerView.setHasFixedSize(true);
