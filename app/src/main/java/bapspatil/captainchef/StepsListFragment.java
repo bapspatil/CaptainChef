@@ -76,12 +76,8 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_steps_list, container, false);
-        unbinder = ButterKnife.bind(this, rootView);
-
+    public void onStart() {
+        super.onStart();
         ingredientsList = getArguments().getParcelableArrayList("ingredientsList");
         recipeStepsList = getArguments().getParcelableArrayList("recipeStepsList");
         foodItemName = getArguments().getString("foodItemName");
@@ -94,9 +90,15 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
         mStepsRecyclerView.setLayoutManager(linearLayoutManager);
 
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
-        mIngredientsRecyclerView.setHasFixedSize(true);
         mStepsRecyclerView.setAdapter(mStepsListAdapter);
-        mStepsRecyclerView.setHasFixedSize(true);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_steps_list, container, false);
+        unbinder = ButterKnife.bind(this, rootView);
 
         return rootView;
     }
