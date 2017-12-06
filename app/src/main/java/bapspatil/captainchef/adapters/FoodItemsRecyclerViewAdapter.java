@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+
 import java.util.ArrayList;
 
 import bapspatil.captainchef.R;
@@ -40,47 +42,14 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
 
     @Override
     public void onBindViewHolder(FoodItemsViewHolder holder, int position) {
-        FoodItem foodItem = mFoodItemsList.get(position);
-        holder.mFoodItemTextView.setText(foodItem.getFoodName());
-        String foodName = foodItem.getFoodName();
-        switch (foodName) {
-            case "Nutella Pie":
-                GlideApp.with(mContext)
-                        .load(foodItem.getImageUrl())
-                        .centerCrop()
-                        .fallback(R.drawable.nutella_pie)
-                        .error(R.drawable.nutella_pie)
-                        .placeholder(R.drawable.nutella_pie)
-                        .into(holder.mFoodItemImageView);
-                break;
-            case "Brownies":
-                GlideApp.with(mContext)
-                        .load(foodItem.getImageUrl())
-                        .centerCrop()
-                        .fallback(R.drawable.brownie)
-                        .error(R.drawable.brownie)
-                        .placeholder(R.drawable.brownie)
-                        .into(holder.mFoodItemImageView);
-                break;
-            case "Yellow Cake":
-                GlideApp.with(mContext)
-                        .load(foodItem.getImageUrl())
-                        .centerCrop()
-                        .fallback(R.drawable.yellow_cake)
-                        .error(R.drawable.yellow_cake)
-                        .placeholder(R.drawable.yellow_cake)
-                        .into(holder.mFoodItemImageView);
-                break;
-            case "Cheesecake":
-                GlideApp.with(mContext)
-                        .load(foodItem.getImageUrl())
-                        .centerCrop()
-                        .fallback(R.drawable.cheesecake)
-                        .error(R.drawable.cheesecake)
-                        .placeholder(R.drawable.cheesecake)
-                        .into(holder.mFoodItemImageView);
-                break;
-        }
+        holder.mFoodItemTextView.setText(mFoodItemsList.get(position).getFoodName());
+        GlideApp.with(mContext)
+                .load(mFoodItemsList.get(position).getImageUrl())
+                .centerCrop()
+                .error(R.drawable.fallback_recipe_thumbnail)
+                .fallback(R.drawable.fallback_recipe_thumbnail)
+                .transition(new DrawableTransitionOptions().crossFade())
+                .into(holder.mFoodItemImageView);
     }
 
     @Override
