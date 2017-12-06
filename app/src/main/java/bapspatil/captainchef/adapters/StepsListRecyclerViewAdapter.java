@@ -1,6 +1,8 @@
 package bapspatil.captainchef.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +43,8 @@ public class StepsListRecyclerViewAdapter extends RecyclerView.Adapter<StepsList
     public void onBindViewHolder(StepsListViewHolder stepsListViewHolder, int i) {
         RecipeStep recipeStep = mRecipeStepsList.get(i);
         String recipeStepString = recipeStep.getStepId() + ". " + recipeStep.getShortInfo();
+        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.autour_one);
+        stepsListViewHolder.mStepTextView.setTypeface(typeface);
         stepsListViewHolder.mStepTextView.setText(recipeStepString);
         GlideApp.with(mContext)
                 .load(recipeStep.getThumbnailUrl())

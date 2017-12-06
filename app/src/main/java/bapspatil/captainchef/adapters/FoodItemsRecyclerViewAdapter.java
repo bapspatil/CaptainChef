@@ -1,6 +1,8 @@
 package bapspatil.captainchef.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,8 @@ public class FoodItemsRecyclerViewAdapter extends RecyclerView.Adapter<FoodItems
 
     @Override
     public void onBindViewHolder(FoodItemsViewHolder holder, int position) {
+        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.autour_one);
+        holder.mFoodItemTextView.setTypeface(typeface);
         holder.mFoodItemTextView.setText(mFoodItemsList.get(position).getFoodName());
         GlideApp.with(mContext)
                 .load(mFoodItemsList.get(position).getImageUrl())

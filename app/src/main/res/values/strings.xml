@@ -7,7 +7,7 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ingredients">Ingredients</string>
-    <string name="steps">Steps (tap for more details)</string>
+    <string name="steps">Steps</string>
     <string name="prev_step">PREV STEP</string>
     <string name="next_step">NEXT STEP</string>
     <string name="appwidget_text">Food item name</string>

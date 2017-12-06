@@ -1,6 +1,8 @@
 package bapspatil.captainchef.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,10 @@ public class IngredientsRecyclerViewAdapter extends RecyclerView.Adapter<Ingredi
     @Override
     public void onBindViewHolder(IngredientsViewHolder ingredientsViewHolder, int i) {
         Ingredient ingredient = mIngredientsList.get(i);
+        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.autour_one);
+        ingredientsViewHolder.mIngredientTextView.setTypeface(typeface);
+        ingredientsViewHolder.mMeasureTextView.setTypeface(typeface);
+        ingredientsViewHolder.mQuantityTextView.setTypeface(typeface);
         ingredientsViewHolder.mIngredientTextView.setText(ingredient.getIngredientName());
         ingredientsViewHolder.mQuantityTextView.setText(String.valueOf(ingredient.getQuant()));
         ingredientsViewHolder.mMeasureTextView.setText(ingredient.getMeasuredWith());

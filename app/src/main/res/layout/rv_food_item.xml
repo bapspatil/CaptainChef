@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="#C0000000"
+        android:fontFamily="@font/autour_one"
         android:padding="16dp"
         android:textColor="#FFF"
         android:transitionName="@string/food_item_name_transition"

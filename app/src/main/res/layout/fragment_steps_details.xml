@@ -13,7 +13,7 @@
         <com.google.android.exoplayer2.ui.SimpleExoPlayerView
             android:id="@+id/video_exoplayer_view"
             android:layout_width="match_parent"
-            android:layout_height="250dp"/>
+            android:layout_height="210dp"/>
 
         <android.support.v7.widget.CardView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,10 +34,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:layout_margin="16dp"
+                android:fontFamily="@font/autour_one"
                 android:lineSpacingExtra="8dp"
                 android:padding="8dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 tools:text="9. Whisk together the egg whites and remaining 300 grams (1.5 cups) of sugar in the bowl of a stand mixer until combined. Set the bowl over the top of the boiling water and continue whisking the egg white mixture until it feels hot to the touch and the sugar is totally dissolved (if you have a reliable thermometer, it should read 150\u00b0F)."/>
 
         </android.support.v7.widget.CardView>
@@ -68,6 +69,7 @@
                     android:background="?android:selectableItemBackground"
                     android:onClick="prevStep"
                     android:text="@string/prev_step"
+                    android:fontFamily="@font/autour_one"
                     android:textColor="#FFF"
                     android:textSize="15sp"/>
 
@@ -96,6 +98,7 @@
                     android:background="?android:selectableItemBackground"
                     android:onClick="nextStep"
                     android:text="@string/next_step"
+                    android:fontFamily="@font/autour_one"
                     android:textColor="#FFF"
                     android:textSize="15sp"/>
 
