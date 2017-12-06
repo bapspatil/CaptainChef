@@ -1,4 +1,4 @@
-package bapspatil.captainchef.data;
+package bapspatil.captainchef.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

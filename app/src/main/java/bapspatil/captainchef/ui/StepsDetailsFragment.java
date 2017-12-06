@@ -1,4 +1,4 @@
-package bapspatil.captainchef;
+package bapspatil.captainchef.ui;
 
 
 import android.content.Context;
@@ -32,7 +32,8 @@ import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
 
-import bapspatil.captainchef.data.RecipeStep;
+import bapspatil.captainchef.R;
+import bapspatil.captainchef.model.RecipeStep;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

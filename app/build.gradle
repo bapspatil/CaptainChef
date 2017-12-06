@@ -9,7 +9,6 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -29,11 +28,13 @@ android {
 }
 
 ext {
-    support = '27.0.1'
+    support = '27.0.2'
     glideVersion = '4.3.1'
     butterknifeVersion = '8.8.1'
     exoplayerVersion = 'r2.5.3'
     toastyVersion = '1.2.5'
+    retrofitVer = '2.3.0'
+    gsonVer = '2.8.2'
 }
 
 dependencies {
@@ -53,5 +54,8 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
     implementation "com.google.android.exoplayer:exoplayer:$exoplayerVersion"
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVer"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVer"
+    implementation "com.google.code.gson:gson:$gsonVer"
 
 }

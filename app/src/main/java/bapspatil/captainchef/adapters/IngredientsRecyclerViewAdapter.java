@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import bapspatil.captainchef.R;
-import bapspatil.captainchef.data.Ingredient;
+import bapspatil.captainchef.model.Ingredient;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

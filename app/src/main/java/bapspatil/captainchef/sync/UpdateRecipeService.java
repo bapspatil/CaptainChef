@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import bapspatil.captainchef.data.Ingredient;
+import bapspatil.captainchef.model.Ingredient;
 
 /**
  * Created by bapspatil

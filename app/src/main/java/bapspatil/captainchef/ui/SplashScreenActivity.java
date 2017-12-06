@@ -1,10 +1,12 @@
-package bapspatil.captainchef;
+package bapspatil.captainchef.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import bapspatil.captainchef.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

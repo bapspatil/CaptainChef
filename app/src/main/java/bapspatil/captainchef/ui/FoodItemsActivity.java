@@ -1,4 +1,4 @@
-package bapspatil.captainchef;
+package bapspatil.captainchef.ui;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
@@ -22,10 +22,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import bapspatil.captainchef.R;
 import bapspatil.captainchef.adapters.FoodItemsRecyclerViewAdapter;
-import bapspatil.captainchef.data.FoodItem;
-import bapspatil.captainchef.data.Ingredient;
-import bapspatil.captainchef.data.RecipeStep;
+import bapspatil.captainchef.model.FoodItem;
+import bapspatil.captainchef.model.Ingredient;
+import bapspatil.captainchef.model.RecipeStep;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;

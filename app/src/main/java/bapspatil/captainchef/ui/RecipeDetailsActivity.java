@@ -1,4 +1,4 @@
-package bapspatil.captainchef;
+package bapspatil.captainchef.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -8,7 +8,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-import bapspatil.captainchef.data.RecipeStep;
+import bapspatil.captainchef.R;
+import bapspatil.captainchef.model.RecipeStep;
 import butterknife.ButterKnife;
 
 public class RecipeDetailsActivity extends AppCompatActivity implements StepsDetailsFragment.OnButtonClickListener {

@@ -15,14 +15,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".FoodItemsActivity">
+        <activity
+            android:name=".ui.FoodItemsActivity"
+            android:launchMode="singleTop">
         </activity>
-        <activity android:name=".RecipeActivity">
+        <activity
+            android:name=".ui.RecipeActivity"
+            android:launchMode="singleTop">
         </activity>
-        <activity android:name=".RecipeDetailsActivity">
+        <activity
+            android:name=".ui.RecipeDetailsActivity"
+            android:launchMode="singleTop">
         </activity>
 
-        <receiver android:name=".RecipeWidgetProvider">
+        <receiver android:name=".sync.RecipeWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
                 <action android:name="android.appwidget.action.RECIPE_UPDATE"/>
@@ -39,7 +45,9 @@
         <service android:name=".sync.UpdateRecipeService"/>
 
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ui.SplashScreenActivity"
+            android:launchMode="singleTop"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>

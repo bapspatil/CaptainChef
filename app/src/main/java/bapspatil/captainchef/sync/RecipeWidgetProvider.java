@@ -1,4 +1,4 @@
-package bapspatil.captainchef;
+package bapspatil.captainchef.sync;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -9,8 +9,8 @@ import android.widget.RemoteViews;
 
 import java.util.ArrayList;
 
-import bapspatil.captainchef.data.Ingredient;
-import bapspatil.captainchef.sync.RecipeWidgetRemoteViewsService;
+import bapspatil.captainchef.R;
+import bapspatil.captainchef.model.Ingredient;
 
 /**
  * Created by bapspatil

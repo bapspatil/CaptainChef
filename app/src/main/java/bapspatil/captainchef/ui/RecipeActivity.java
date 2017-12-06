@@ -1,4 +1,4 @@
-package bapspatil.captainchef;
+package bapspatil.captainchef.ui;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import bapspatil.captainchef.data.FoodItem;
-import bapspatil.captainchef.data.Ingredient;
-import bapspatil.captainchef.data.RecipeStep;
+import bapspatil.captainchef.R;
+import bapspatil.captainchef.model.FoodItem;
+import bapspatil.captainchef.model.Ingredient;
+import bapspatil.captainchef.model.RecipeStep;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

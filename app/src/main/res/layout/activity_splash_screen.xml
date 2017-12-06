@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorPrimary"
     android:layout_height="match_parent"
-    tools:context="bapspatil.captainchef.SplashScreenActivity">
+    tools:context="bapspatil.captainchef.ui.SplashScreenActivity">
 
     <ImageView
         android:id="@+id/splash_iv"

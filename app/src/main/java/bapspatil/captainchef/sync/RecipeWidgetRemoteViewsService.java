@@ -8,9 +8,9 @@ import android.widget.RemoteViewsService;
 import java.util.ArrayList;
 
 import bapspatil.captainchef.R;
-import bapspatil.captainchef.data.Ingredient;
+import bapspatil.captainchef.model.Ingredient;
 
-import static bapspatil.captainchef.RecipeWidgetProvider.ingredientArrayList;
+import static bapspatil.captainchef.sync.RecipeWidgetProvider.ingredientArrayList;
 
 ;
 

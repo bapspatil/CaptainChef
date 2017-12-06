@@ -8,23 +8,16 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     app:cardBackgroundColor="#FFF"
-    app:cardUseCompatPadding="true"
     app:cardCornerRadius="8dp"
-    app:cardElevation="6dp">
+    app:cardElevation="6dp"
+    app:cardUseCompatPadding="true">
 
-    <android.support.constraint.ConstraintLayout
+    <ImageView
+        android:id="@+id/step_item_iv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/step_item_iv"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:contentDescription="@string/recipe_item_image_view"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="H,16:9"/>
-
-    </android.support.constraint.ConstraintLayout>
+        android:layout_height="240dp"
+        android:contentDescription="@string/recipe_item_image_view"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/step_item_tv"
@@ -36,5 +29,4 @@
         android:padding="16dp"
         android:textColor="#FFF"
         tools:text="0. Recipe Introduction"/>
-
 </android.support.v7.widget.CardView>

@@ -1,4 +1,4 @@
-package bapspatil.captainchef.glide;
+package bapspatil.captainchef.utils;
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
@@ -8,5 +8,5 @@ import com.bumptech.glide.module.AppGlideModule;
  */
 
 @GlideModule
-public class MyAppGlideModule extends AppGlideModule {
+public class MyGlideModule extends AppGlideModule {
 }

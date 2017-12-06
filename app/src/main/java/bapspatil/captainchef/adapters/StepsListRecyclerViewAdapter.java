@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import bapspatil.captainchef.R;
-import bapspatil.captainchef.data.RecipeStep;
-import bapspatil.captainchef.glide.GlideApp;
+import bapspatil.captainchef.model.RecipeStep;
+import bapspatil.captainchef.utils.GlideApp;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
