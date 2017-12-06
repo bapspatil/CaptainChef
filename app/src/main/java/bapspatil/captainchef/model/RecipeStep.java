@@ -3,9 +3,14 @@ package bapspatil.captainchef.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class RecipeStep implements Parcelable {
-    private int stepId;
-    private String shortInfo, info, videoUrl, thumbnailUrl;
+    @SerializedName("id") private int stepId;
+    @SerializedName("shortDescription") private String shortInfo;
+    @SerializedName("description") private String info;
+    @SerializedName("videoURL") private String videoUrl;
+    @SerializedName("thumbnailURL") private String thumbnailUrl;
 
     @Override
     public int describeContents() {

@@ -3,9 +3,12 @@ package bapspatil.captainchef.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Ingredient implements Parcelable {
-    private int quant;
-    private String measuredWith, ingredientName;
+    @SerializedName("quantity") private int quant;
+    @SerializedName("measure") private String measuredWith;
+    @SerializedName("ingredient") private String ingredientName;
 
     @Override
     public int describeContents() {

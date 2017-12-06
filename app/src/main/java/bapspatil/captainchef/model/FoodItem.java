@@ -3,11 +3,14 @@ package bapspatil.captainchef.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class FoodItem implements Parcelable {
-    private int foodId;
-    private String foodName, imageUrl;
+    @SerializedName("id") private int foodId;
+    @SerializedName("name") private String foodName;
+    @SerializedName("image") private String imageUrl;
 
     public String getImageUrl() {
         return imageUrl;
