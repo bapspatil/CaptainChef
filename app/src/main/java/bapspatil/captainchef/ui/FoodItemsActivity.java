@@ -1,12 +1,8 @@
 package bapspatil.captainchef.ui;
 
-import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,27 +10,23 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import bapspatil.captainchef.R;
 import bapspatil.captainchef.adapters.FoodItemsRecyclerViewAdapter;
 import bapspatil.captainchef.model.FoodItem;
-import bapspatil.captainchef.model.Ingredient;
-import bapspatil.captainchef.model.RecipeStep;
+import bapspatil.captainchef.network.BakingAPI;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class FoodItemsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String>, FoodItemsRecyclerViewAdapter.OnFoodItemClickListener {
+public class FoodItemsActivity extends AppCompatActivity implements FoodItemsRecyclerViewAdapter.OnFoodItemClickListener {
     private ArrayList<FoodItem> foodItemsList = new ArrayList<>();
-    private static final int FOOD_ITEMS_LOADER_ID = 13;
     private FoodItemsRecyclerViewAdapter mAdapter;
+
     @BindView(R.id.food_items_rv) RecyclerView mFoodItemsRecyclerView;
     @BindView(R.id.toolbar) Toolbar toolbar;
 
@@ -55,99 +47,24 @@ public class FoodItemsActivity extends AppCompatActivity implements LoaderManage
         mFoodItemsRecyclerView.setAdapter(mAdapter);
         mFoodItemsRecyclerView.setHasFixedSize(true);
 
-        getSupportLoaderManager().initLoader(FOOD_ITEMS_LOADER_ID, null, this);
+        fetchFoodItems();
     }
 
-    public String loadMainJson() {
-        String json;
-        try {
-            InputStream is = getApplicationContext().getResources().openRawResource(R.raw.baking);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    @Override
-    public Loader<String> onCreateLoader(int i, final Bundle bundle) {
-        return new AsyncTaskLoader<String>(this) {
-            String mFoodItems;
-
+    private void fetchFoodItems() {
+        BakingAPI bakingAPI = BakingAPI.retrofit.create(BakingAPI.class);
+        Call<ArrayList<FoodItem>> foodItemsCall = bakingAPI.getFoodItems();
+        foodItemsCall.enqueue(new Callback<ArrayList<FoodItem>>() {
             @Override
-            protected void onStartLoading() {
-                super.onStartLoading();
-                if (mFoodItems != null)
-                    deliverResult(mFoodItems);
-                else
-                    forceLoad();
-            }
-
-            @Override
-            public String loadInBackground() {
-                return loadMainJson();
-            }
-
-            @Override
-            public void deliverResult(String fetchedJsonData) {
-                mFoodItems = fetchedJsonData;
-                super.deliverResult(fetchedJsonData);
-            }
-        };
-    }
-
-    @Override
-    public void onLoadFinished(Loader<String> loader, String fetchedJsonData) {
-        foodItemsList.clear();
-        try {
-            JSONArray jsonFoodItemsArray = new JSONArray(fetchedJsonData);
-            for (int i = 0; i < jsonFoodItemsArray.length(); i++) {
-                JSONObject jsonFoodItem = jsonFoodItemsArray.getJSONObject(i);
-                FoodItem foodItem = new FoodItem();
-                foodItem.setFoodId(jsonFoodItem.getInt("id"));
-                foodItem.setFoodName(jsonFoodItem.getString("name"));
-                foodItem.setImageUrl(jsonFoodItem.getString("image"));
-                JSONArray jsonIngredientArray = jsonFoodItem.getJSONArray("ingredients");
-                ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
-                for (int j = 0; j < jsonIngredientArray.length(); j++) {
-                    JSONObject jsonIngredient = jsonIngredientArray.getJSONObject(j);
-                    Ingredient ingredient = new Ingredient();
-                    ingredient.setQuant(jsonIngredient.getInt("quantity"));
-                    ingredient.setIngredientName(jsonIngredient.getString("ingredient"));
-                    ingredient.setMeasuredWith(jsonIngredient.getString("measure"));
-                    ingredientArrayList.add(ingredient);
-                }
-                JSONArray jsonRecipeStepArray = jsonFoodItem.getJSONArray("steps");
-                ArrayList<RecipeStep> recipeStepArrayList = new ArrayList<>();
-                for (int j = 0; j < jsonRecipeStepArray.length(); j++) {
-                    JSONObject jsonRecipeStep = jsonRecipeStepArray.getJSONObject(j);
-                    RecipeStep recipeStep = new RecipeStep();
-                    recipeStep.setStepId(jsonRecipeStep.getInt("id"));
-                    recipeStep.setShortInfo(jsonRecipeStep.getString("shortDescription"));
-                    recipeStep.setInfo(jsonRecipeStep.getString("description"));
-                    recipeStep.setVideoUrl(jsonRecipeStep.getString("videoURL"));
-                    recipeStep.setThumbnailUrl(jsonRecipeStep.getString("thumbnailURL"));
-                    recipeStepArrayList.add(recipeStep);
-                }
-                foodItem.setIngredientArrayList(ingredientArrayList);
-                foodItem.setRecipeStepArrayList(recipeStepArrayList);
-                foodItemsList.add(foodItem);
+            public void onResponse(Call<ArrayList<FoodItem>> call, Response<ArrayList<FoodItem>> response) {
+                foodItemsList.addAll(response.body());
                 mAdapter.notifyDataSetChanged();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
-    @Override
-    public void onLoaderReset(Loader<String> loader) {
-        // Not implementing onLoaderReset
+            @Override
+            public void onFailure(Call<ArrayList<FoodItem>> call, Throwable t) {
+                Toasty.error(getApplicationContext(), "Couldn't load food items!", 5000).show();
+            }
+        });
     }
 
     private boolean isPhone() {
