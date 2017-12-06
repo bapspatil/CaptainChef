@@ -35,7 +35,6 @@ public class FoodItemsActivity extends AppCompatActivity implements FoodItemsRec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_items);
         ButterKnife.bind(this);
-        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Toasty.info(getApplicationContext(), "App developed by Bapusaheb Patil", 5000).show();
 

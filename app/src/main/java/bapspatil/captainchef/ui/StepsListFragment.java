@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -33,9 +32,6 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
     //    private OnStepClickListener mListener;
     @BindView(R.id.ingredients_rv) MyRecyclerView mIngredientsRecyclerView;
     @BindView(R.id.steps_rv) MyRecyclerView mStepsRecyclerView;
-    @BindView(R.id.ingredient_label_tv) TextView mIngredLabelTextView;
-    @BindView(R.id.line_view) View lineView;
-    @BindView(R.id.steps_label_tv) TextView mStepsLabelTextView;
     @BindView(R.id.add_to_widget_button) CardView addToWidgetButton;
     private ArrayList<Ingredient> ingredientsList;
     private IngredientsRecyclerViewAdapter mIngredientsAdapter;
@@ -87,7 +83,7 @@ public class StepsListFragment extends Fragment implements StepsListRecyclerView
         mStepsListAdapter = new StepsListRecyclerViewAdapter(getContext(), recipeStepsList, this);
 
         mIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mStepsRecyclerView.setLayoutManager(linearLayoutManager);
 
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
