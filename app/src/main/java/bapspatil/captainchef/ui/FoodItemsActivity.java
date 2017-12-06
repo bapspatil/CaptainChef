@@ -56,13 +56,17 @@ public class FoodItemsActivity extends AppCompatActivity implements FoodItemsRec
         foodItemsCall.enqueue(new Callback<ArrayList<FoodItem>>() {
             @Override
             public void onResponse(Call<ArrayList<FoodItem>> call, Response<ArrayList<FoodItem>> response) {
-                foodItemsList.addAll(response.body());
-                mAdapter.notifyDataSetChanged();
+                if(response.body() != null) {
+                    foodItemsList.addAll(response.body());
+                    mAdapter.notifyDataSetChanged();
+                } else {
+                    Toasty.error(getApplicationContext(), "Couldn't load food items!", 5000).show();
+                }
             }
 
             @Override
             public void onFailure(Call<ArrayList<FoodItem>> call, Throwable t) {
-                Toasty.error(getApplicationContext(), "Couldn't load food items!", 5000).show();
+                Toasty.error(getApplicationContext(), "Couldn't load food items! " + t.getMessage(), 5000).show();
             }
         });
     }

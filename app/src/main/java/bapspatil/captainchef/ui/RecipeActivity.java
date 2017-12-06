@@ -42,8 +42,8 @@ public class RecipeActivity extends AppCompatActivity implements StepsListFragme
 
         recipeToolbarTextView.setText(foodItemName);
 
-        ingredientsList = foodItem.getIngredientArrayList();
-        recipeStepsList = foodItem.getRecipeStepArrayList();
+        ingredientsList = foodItem.getIngredients();
+        recipeStepsList = foodItem.getSteps();
         if (isPhone()) {
             mTwoPane = false;
             if (savedInstanceState == null) {

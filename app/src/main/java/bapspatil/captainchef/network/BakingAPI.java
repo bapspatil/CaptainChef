@@ -14,11 +14,13 @@ import retrofit2.http.GET;
 
 public interface BakingAPI {
 
+    String BASE_URL = "https://raw.githubusercontent.com/bapspatil/CaptainChef/master/";
+
     @GET("resources/baking.json")
     Call<ArrayList<FoodItem>> getFoodItems();
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://raw.githubusercontent.com/bapspatil/CaptainChef/master/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 }

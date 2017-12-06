@@ -6,20 +6,15 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 public class Ingredient implements Parcelable {
-    @SerializedName("quantity") private int quant;
+    @SerializedName("quantity") private float quant;
     @SerializedName("measure") private String measuredWith;
     @SerializedName("ingredient") private String ingredientName;
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public int getQuant() {
+    public float getQuant() {
         return quant;
     }
 
-    public void setQuant(int quant) {
+    public void setQuant(float quant) {
         this.quant = quant;
     }
 
@@ -39,24 +34,36 @@ public class Ingredient implements Parcelable {
         this.ingredientName = ingredientName;
     }
 
-    @Override
+    public Ingredient() {
 
+    }
+
+    public Ingredient(float quant, String measuredWith, String ingredientName) {
+
+        this.quant = quant;
+        this.measuredWith = measuredWith;
+        this.ingredientName = ingredientName;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.quant);
+        dest.writeFloat(this.quant);
         dest.writeString(this.measuredWith);
         dest.writeString(this.ingredientName);
     }
 
-    public Ingredient() {
-    }
-
     protected Ingredient(Parcel in) {
-        this.quant = in.readInt();
+        this.quant = in.readFloat();
         this.measuredWith = in.readString();
         this.ingredientName = in.readString();
     }
 
-    public static final Parcelable.Creator<Ingredient> CREATOR = new Parcelable.Creator<Ingredient>() {
+    public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
         @Override
         public Ingredient createFromParcel(Parcel source) {
             return new Ingredient(source);

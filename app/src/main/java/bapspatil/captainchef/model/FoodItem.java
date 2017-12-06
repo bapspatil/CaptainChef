@@ -11,17 +11,8 @@ public class FoodItem implements Parcelable {
     @SerializedName("id") private int foodId;
     @SerializedName("name") private String foodName;
     @SerializedName("image") private String imageUrl;
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    private ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
-    private ArrayList<RecipeStep> recipeStepArrayList = new ArrayList<>();
+    @SerializedName("ingredients") private ArrayList<Ingredient> ingredients;
+    @SerializedName("steps") private ArrayList<RecipeStep> steps;
 
     public int getFoodId() {
         return foodId;
@@ -39,20 +30,41 @@ public class FoodItem implements Parcelable {
         this.foodName = foodName;
     }
 
-    public ArrayList<Ingredient> getIngredientArrayList() {
-        return ingredientArrayList;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setIngredientArrayList(ArrayList<Ingredient> ingredientArrayList) {
-        this.ingredientArrayList = ingredientArrayList;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public ArrayList<RecipeStep> getRecipeStepArrayList() {
-        return recipeStepArrayList;
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setRecipeStepArrayList(ArrayList<RecipeStep> recipeStepArrayList) {
-        this.recipeStepArrayList = recipeStepArrayList;
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public ArrayList<RecipeStep> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(ArrayList<RecipeStep> steps) {
+        this.steps = steps;
+    }
+
+    public FoodItem(int foodId, String foodName, String imageUrl, ArrayList<Ingredient> ingredients, ArrayList<RecipeStep> steps) {
+
+        this.foodId = foodId;
+        this.foodName = foodName;
+        this.imageUrl = imageUrl;
+        this.ingredients = ingredients;
+        this.steps = steps;
+    }
+
+    public FoodItem() {
+
     }
 
     @Override
@@ -64,21 +76,20 @@ public class FoodItem implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.foodId);
         dest.writeString(this.foodName);
-        dest.writeTypedList(this.ingredientArrayList);
-        dest.writeTypedList(this.recipeStepArrayList);
-    }
-
-    public FoodItem() {
+        dest.writeString(this.imageUrl);
+        dest.writeTypedList(this.ingredients);
+        dest.writeTypedList(this.steps);
     }
 
     protected FoodItem(Parcel in) {
         this.foodId = in.readInt();
         this.foodName = in.readString();
-        this.ingredientArrayList = in.createTypedArrayList(Ingredient.CREATOR);
-        this.recipeStepArrayList = in.createTypedArrayList(RecipeStep.CREATOR);
+        this.imageUrl = in.readString();
+        this.ingredients = in.createTypedArrayList(Ingredient.CREATOR);
+        this.steps = in.createTypedArrayList(RecipeStep.CREATOR);
     }
 
-    public static final Parcelable.Creator<FoodItem> CREATOR = new Parcelable.Creator<FoodItem>() {
+    public static final Creator<FoodItem> CREATOR = new Creator<FoodItem>() {
         @Override
         public FoodItem createFromParcel(Parcel source) {
             return new FoodItem(source);
