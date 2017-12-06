@@ -101,7 +101,7 @@
         }
       ],
       "servings": 8,
-      "image": ""
+      "image": "https://raw.githubusercontent.com/bapspatil/CaptainChef/master/resources/nutella_pie.jpg"
     },
     {
       "id": 2,
@@ -231,7 +231,7 @@
         }
       ],
       "servings": 8,
-      "image": ""
+      "image": "https://raw.githubusercontent.com/bapspatil/CaptainChef/master/resources/brownie.jpg"
     },
     {
       "id": 3,
@@ -382,7 +382,7 @@
         }
       ],
       "servings": 8,
-      "image": ""
+      "image": "https://raw.githubusercontent.com/bapspatil/CaptainChef/master/resources/yellow_cake.jpg"
     },
     {
       "id": 4,
@@ -528,6 +528,6 @@
         }
       ],
       "servings": 8,
-      "image": ""
+      "image": "https://raw.githubusercontent.com/bapspatil/CaptainChef/master/resources/cheesecake.jpg"
     }
   ]
