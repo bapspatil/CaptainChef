@@ -7,4 +7,3 @@ A Material-design baking/cooking recipes app (Project 3: Baking App)
 <img src="https://github.com/bapspatil/CaptainChef/blob/master/screenshots/screen2.png"> <img src="https://github.com/bapspatil/CaptainChef/blob/master/screenshots/screen3.png">
 <img src="https://github.com/bapspatil/CaptainChef/blob/master/screenshots/screen4.png">
 <br/><br/>
-<a href='https://github.com/bapspatil/CaptainChef/blob/master/screenshots/prize.pdf'><img alt='Download PDF' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_gneric.png' width="30%" height="30%"/></a>
