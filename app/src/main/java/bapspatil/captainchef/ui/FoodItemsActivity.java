@@ -50,7 +50,7 @@ public class FoodItemsActivity extends AppCompatActivity implements FoodItemsRec
     }
 
     private void fetchFoodItems() {
-        BakingAPI bakingAPI = BakingAPI.retrofit.create(BakingAPI.class);
+        BakingAPI bakingAPI = BakingAPI.Companion.getRetrofit().create(BakingAPI.class);
         Call<ArrayList<FoodItem>> foodItemsCall = bakingAPI.getFoodItems();
         foodItemsCall.enqueue(new Callback<ArrayList<FoodItem>>() {
             @Override

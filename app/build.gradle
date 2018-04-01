@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -7,8 +10,8 @@ android {
         applicationId "bapspatil.captainchef"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
     }
     buildTypes {
         release {
@@ -16,9 +19,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 ext {
+    ankoVersion = '0.10.4'
     support = '27.1.0'
     glideVersion = '4.6.1'
     butterknifeVersion = '8.8.1'
@@ -29,7 +47,12 @@ ext {
 }
 
 dependencies {
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVer"
+    implementation "org.jetbrains.anko:anko:$ankoVersion"
+    implementation "org.jetbrains.anko:anko-design:$ankoVersion"
 
+    // Android Support
     implementation "com.android.support:appcompat-v7:$support"
     implementation "com.android.support:support-v4:$support"
     implementation "com.android.support:support-v13:$support"
@@ -37,16 +60,16 @@ dependencies {
     implementation "com.android.support:cardview-v7:$support"
     implementation "com.android.support:design:$support"
     implementation "com.android.support:recyclerview-v7:$support"
-    implementation "com.android.support.constraint:constraint-layout:1.0.2"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
+    // App
     implementation "com.github.bumptech.glide:glide:$glideVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
     implementation "com.jakewharton:butterknife:$butterknifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    kapt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
     implementation "com.google.android.exoplayer:exoplayer:$exoplayerVersion"
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVer"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVer"
     implementation "com.google.code.gson:gson:$gsonVer"
-
 }
