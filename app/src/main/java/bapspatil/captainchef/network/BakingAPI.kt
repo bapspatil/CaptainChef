@@ -13,7 +13,8 @@ import java.util.*
 
 interface BakingAPI {
 
-    @get:GET("resources/baking.json") val foodItems: Call<ArrayList<FoodItem>>
+    @get:GET("resources/baking.json")
+    val foodItems: Call<ArrayList<FoodItem>>
 
     companion object {
 
