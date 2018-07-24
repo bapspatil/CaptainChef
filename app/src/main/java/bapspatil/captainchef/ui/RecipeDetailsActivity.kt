@@ -27,7 +27,7 @@ class RecipeDetailsActivity : AppCompatActivity(), StepsDetailsFragment.OnButton
         mRecipeStepsList = intent.getParcelableArrayListExtra("recipeList")
         fragmentManager = supportFragmentManager
         if (savedInstanceState == null) {
-            val stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep, mRecipeStepsList)
+            val stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep!!, mRecipeStepsList!!)
             fragmentManager!!.beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.recipe_details_container, stepsDetailsFragment)
@@ -47,22 +47,22 @@ class RecipeDetailsActivity : AppCompatActivity(), StepsDetailsFragment.OnButton
         }
     }
 
-    override fun onButtonClicked(buttonClicked: Int, recipeStep: RecipeStep, recipeSteps: ArrayList<RecipeStep>, view: View) {
+    override fun onButtonClicked(buttonClicked: Int, recipeStep: RecipeStep?, recipeSteps: ArrayList<RecipeStep>?, view: View) {
         if (buttonClicked == StepsDetailsFragment.PREV_BUTTON) {
-            var id = recipeStep.stepId
+            var id = recipeStep!!.stepId
             id--
-            val prevRecipeStep = recipeSteps[id]
-            val stepsDetailsFragment = StepsDetailsFragment.newInstance(prevRecipeStep, mRecipeStepsList)
+            val prevRecipeStep = recipeSteps!![id]
+            val stepsDetailsFragment = StepsDetailsFragment.newInstance(prevRecipeStep, mRecipeStepsList!!)
             fragmentManager = supportFragmentManager
             fragmentManager!!.beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.recipe_details_container, stepsDetailsFragment)
                     .commit()
         } else {
-            var id = recipeStep.stepId
+            var id = recipeStep!!.stepId
             id++
-            val nextRecipeStep = recipeSteps[id]
-            val stepsDetailsFragment = StepsDetailsFragment.newInstance(nextRecipeStep, mRecipeStepsList)
+            val nextRecipeStep = recipeSteps!![id]
+            val stepsDetailsFragment = StepsDetailsFragment.newInstance(nextRecipeStep, mRecipeStepsList!!)
             fragmentManager = supportFragmentManager
             fragmentManager!!.beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)

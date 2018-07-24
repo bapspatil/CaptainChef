@@ -26,9 +26,9 @@ class FoodItemsActivity : AppCompatActivity(), FoodItemsRecyclerViewAdapter.OnFo
     private var mAdapter: FoodItemsRecyclerViewAdapter? = null
 
     @BindView(R.id.food_items_rv)
-    internal var mFoodItemsRecyclerView: RecyclerView? = null
+    var mFoodItemsRecyclerView: RecyclerView? = null
     @BindView(R.id.toolbar)
-    internal var toolbar: Toolbar? = null
+    var toolbar: Toolbar? = null
 
     private val isPhone: Boolean
         get() {

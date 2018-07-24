@@ -3,23 +3,21 @@ package bapspatil.captainchef.ui
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import bapspatil.captainchef.R
 import bapspatil.captainchef.adapters.IngredientsRecyclerViewAdapter
-import bapspatil.captainchef.adapters.MyRecyclerView
 import bapspatil.captainchef.adapters.StepsListRecyclerViewAdapter
 import bapspatil.captainchef.model.Ingredient
 import bapspatil.captainchef.model.RecipeStep
 import bapspatil.captainchef.sync.UpdateRecipeService
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.fragment_steps_list.*
 import java.util.*
 
 
@@ -27,13 +25,7 @@ import java.util.*
  * Created by bapspatil
  */
 class StepsListFragment : Fragment(), StepsListRecyclerViewAdapter.OnRecipeStepClickedListener {
-    //    private OnStepClickListener mListener;
-    @BindView(R.id.ingredients_rv)
-    internal var mIngredientsRecyclerView: MyRecyclerView? = null
-    @BindView(R.id.steps_rv)
-    internal var mStepsRecyclerView: MyRecyclerView? = null
-    @BindView(R.id.add_to_widget_button)
-    internal var addToWidgetButton: CardView? = null
+
     private var ingredientsList: ArrayList<Ingredient>? = null
     private var mIngredientsAdapter: IngredientsRecyclerViewAdapter? = null
     private var recipeStepsList: ArrayList<RecipeStep>? = null
@@ -67,12 +59,12 @@ class StepsListFragment : Fragment(), StepsListRecyclerViewAdapter.OnRecipeStepC
         mIngredientsAdapter = IngredientsRecyclerViewAdapter(context!!, ingredientsList!!)
         mStepsListAdapter = StepsListRecyclerViewAdapter(context!!, recipeStepsList!!, this)
 
-        mIngredientsRecyclerView!!.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        ingredients_rv!!.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        mStepsRecyclerView!!.layoutManager = linearLayoutManager
+        steps_rv!!.layoutManager = linearLayoutManager
 
-        mIngredientsRecyclerView!!.adapter = mIngredientsAdapter!!
-        mStepsRecyclerView!!.adapter = mStepsListAdapter!!
+        ingredients_rv!!.adapter = mIngredientsAdapter!!
+        steps_rv!!.adapter = mStepsListAdapter!!
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -23,9 +23,9 @@ class RecipeActivity : AppCompatActivity(), StepsListFragment.OnStepClickListene
     private lateinit var fragmentManager: FragmentManager
     private var mTwoPane: Boolean = false
     @BindView(R.id.toolbar)
-    internal var toolbar: Toolbar? = null
+    var toolbar: Toolbar? = null
     @BindView(R.id.recipe_toolbar_tv)
-    internal var recipeToolbarTextView: TextView? = null
+    var recipeToolbarTextView: TextView? = null
 
     private val isPhone: Boolean
         get() {
@@ -51,7 +51,7 @@ class RecipeActivity : AppCompatActivity(), StepsListFragment.OnStepClickListene
         if (isPhone) {
             mTwoPane = false
             if (savedInstanceState == null) {
-                val stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName)
+                val stepsListFragment = StepsListFragment.newInstance(ingredientsList!!, recipeStepsList!!, foodItemName!!)
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                         .replace(R.id.recipe_container, stepsListFragment)
@@ -61,7 +61,7 @@ class RecipeActivity : AppCompatActivity(), StepsListFragment.OnStepClickListene
         } else {
             mTwoPane = true
             if (savedInstanceState == null) {
-                val stepsListFragment = StepsListFragment.newInstance(ingredientsList, recipeStepsList, foodItemName)
+                val stepsListFragment = StepsListFragment.newInstance(ingredientsList!!, recipeStepsList!!, foodItemName!!)
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                         .replace(R.id.recipe_container, stepsListFragment)
@@ -78,7 +78,7 @@ class RecipeActivity : AppCompatActivity(), StepsListFragment.OnStepClickListene
             val options = ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, android.R.anim.fade_out)
             startActivity(startRecipeDetailsActivity, options.toBundle())
         } else {
-            val stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep, recipeStepsList)
+            val stepsDetailsFragment = StepsDetailsFragment.newInstance(mRecipeStep, recipeStepsList!!)
             fragmentManager = supportFragmentManager
             fragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -92,8 +92,7 @@ class RecipeActivity : AppCompatActivity(), StepsListFragment.OnStepClickListene
         this@RecipeActivity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
-    override fun onButtonClicked(buttonClicked: Int, recipeStep: RecipeStep, recipeSteps: ArrayList<RecipeStep>, view: View) {
+    override fun onButtonClicked(buttonClicked: Int, recipeStep: RecipeStep?, recipeSteps: ArrayList<RecipeStep>?, view: View) {
 
     }
-
 }

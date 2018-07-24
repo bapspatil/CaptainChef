@@ -5,13 +5,13 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    buildToolsVersion "28.0.1"
     defaultConfig {
         applicationId "bapspatil.captainchef"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
         release {
@@ -36,14 +36,13 @@ androidExtensions {
 }
 
 ext {
-    ankoVersion = '0.10.4'
-    support = '27.1.0'
-    glideVersion = '4.6.1'
-    butterknifeVersion = '8.8.1'
-    exoplayerVersion = '2.7.2'
-    toastyVersion = '1.2.8'
+    ankoVersion = '0.10.5'
+    support = '27.1.1'
+    glideVersion = '4.7.1'
+    exoplayerVersion = '2.8.2'
+    toastyVersion = '1.3.0'
     retrofitVer = '2.4.0'
-    gsonVer = '2.8.2'
+    gsonVer = '2.8.5'
 }
 
 dependencies {
@@ -52,7 +51,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko:$ankoVersion"
     implementation "org.jetbrains.anko:anko-design:$ankoVersion"
 
-    // Android Support
+    // Android Support Library
     implementation "com.android.support:appcompat-v7:$support"
     implementation "com.android.support:support-v4:$support"
     implementation "com.android.support:support-v13:$support"
@@ -62,11 +61,9 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$support"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    // App
+    // App dependencies
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
-    implementation "com.jakewharton:butterknife:$butterknifeVersion"
-    kapt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
     implementation "com.google.android.exoplayer:exoplayer:$exoplayerVersion"
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVer"

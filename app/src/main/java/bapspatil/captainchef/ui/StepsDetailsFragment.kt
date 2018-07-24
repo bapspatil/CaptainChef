@@ -36,17 +36,17 @@ import java.util.*
  */
 class StepsDetailsFragment : Fragment() {
     @BindView(R.id.step_description_tv)
-    internal var mStepDescription: TextView? = null
+    var mStepDescription: TextView? = null
     @BindView(R.id.video_exoplayer_view)
-    internal var mPlayerView: SimpleExoPlayerView? = null
+    var mPlayerView: SimpleExoPlayerView? = null
     @BindView(R.id.next_button)
-    internal var nextButton: Button? = null
+    var nextButton: Button? = null
     @BindView(R.id.prev_button)
-    internal var prevButton: Button? = null
+    var prevButton: Button? = null
     @BindView(R.id.next_card_view)
-    internal var nextCardView: CardView? = null
+    var nextCardView: CardView? = null
     @BindView(R.id.prev_card_view)
-    internal var prevCardView: CardView? = null
+    var prevCardView: CardView? = null
     private var mPlayer: SimpleExoPlayer? = null
     private var unbinder: Unbinder? = null
     private var recipeStep: RecipeStep? = null
