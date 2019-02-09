@@ -36,7 +36,6 @@ class MyRecyclerView : RecyclerView {
         super.onRestoreInstanceState(state)
     }
 
-
     override fun setAdapter(adapter: RecyclerView.Adapter<*>) {
         super.setAdapter(adapter)
         restorePosition()

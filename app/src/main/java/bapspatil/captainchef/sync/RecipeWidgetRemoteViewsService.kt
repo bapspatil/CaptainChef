@@ -23,7 +23,6 @@ class RecipeWidgetRemoteViewsService : RemoteViewsService() {
     inner class RecipeWidgetRemoteViewsFactory(internal var mContext: Context, intent: Intent) : RemoteViewsService.RemoteViewsFactory {
 
         override fun onCreate() {
-
         }
 
         override fun onDataSetChanged() {
@@ -31,7 +30,6 @@ class RecipeWidgetRemoteViewsService : RemoteViewsService() {
         }
 
         override fun onDestroy() {
-
         }
 
         override fun getCount(): Int {
@@ -68,5 +66,4 @@ class RecipeWidgetRemoteViewsService : RemoteViewsService() {
             return true
         }
     }
-
 }

@@ -57,7 +57,6 @@ class RecipeActivity : AppCompatActivity(), StepsListFragment.OnStepClickListene
                         .replace(R.id.recipe_container, stepsListFragment)
                         .commit()
             }
-
         } else {
             mTwoPane = true
             if (savedInstanceState == null) {
@@ -93,6 +92,5 @@ class RecipeActivity : AppCompatActivity(), StepsListFragment.OnStepClickListene
     }
 
     override fun onButtonClicked(buttonClicked: Int, recipeStep: RecipeStep?, recipeSteps: ArrayList<RecipeStep>?, view: View) {
-
     }
 }

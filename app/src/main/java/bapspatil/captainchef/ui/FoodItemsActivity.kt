@@ -81,5 +81,4 @@ class FoodItemsActivity : AppCompatActivity(), FoodItemsRecyclerViewAdapter.OnFo
         val options = ActivityOptions.makeCustomAnimation(this, android.R.anim.fade_in, android.R.anim.fade_out)
         startActivity(startRecipeActivity, options.toBundle())
     }
-
 }

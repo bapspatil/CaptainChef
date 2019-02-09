@@ -1,6 +1,5 @@
 package bapspatil.captainchef.ui
 
-
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -30,7 +29,6 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import java.util.*
 
-
 /**
  * A simple [Fragment] subclass.
  */
@@ -55,8 +53,11 @@ class StepsDetailsFragment : Fragment() {
     private var recipeStepsList: ArrayList<RecipeStep>? = null
     lateinit var mButtonListener: OnButtonClickListener
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val rootView = inflater.inflate(R.layout.fragment_steps_details, container, false)
         unbinder = ButterKnife.bind(this, rootView)
 
@@ -95,7 +96,6 @@ class StepsDetailsFragment : Fragment() {
         super.onDestroyView()
         unbinder!!.unbind()
     }
-
 
     override fun onPause() {
         super.onPause()
@@ -168,7 +168,6 @@ class StepsDetailsFragment : Fragment() {
         } catch (e: ClassCastException) {
             throw ClassCastException(context!!.toString() + " must implement OnButtonClickListener")
         }
-
     }
 
     companion object {
@@ -185,5 +184,4 @@ class StepsDetailsFragment : Fragment() {
             return stepsDetailsFragment
         }
     }
-
-}// Required empty public constructor
+} // Required empty public constructor

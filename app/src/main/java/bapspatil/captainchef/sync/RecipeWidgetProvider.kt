@@ -79,4 +79,3 @@ class RecipeWidgetProvider : AppWidgetProvider() {
         }
     }
 }
-

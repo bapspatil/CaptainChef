@@ -75,5 +75,4 @@ class RecipeDetailsActivity : AppCompatActivity(), StepsDetailsFragment.OnButton
         super.onBackPressed()
         this@RecipeDetailsActivity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
-
 }

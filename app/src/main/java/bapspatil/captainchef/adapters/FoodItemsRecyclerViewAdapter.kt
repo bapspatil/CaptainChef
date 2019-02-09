@@ -63,5 +63,4 @@ class FoodItemsRecyclerViewAdapter(private val mContext: Context, private val mF
     interface OnFoodItemClickListener {
         fun onFoodItemClicked(position: Int, textView: TextView?)
     }
-
 }

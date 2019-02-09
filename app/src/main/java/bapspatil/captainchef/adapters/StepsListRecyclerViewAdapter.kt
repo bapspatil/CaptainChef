@@ -67,5 +67,4 @@ class StepsListRecyclerViewAdapter(private val mContext: Context, private val mR
     interface OnRecipeStepClickedListener {
         fun onRecipeStepClicked(recipeStep: RecipeStep)
     }
-
 }

@@ -20,7 +20,6 @@ import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_steps_list.*
 import java.util.*
 
-
 /**
  * Created by bapspatil
  */
@@ -67,8 +66,11 @@ class StepsListFragment : Fragment(), StepsListRecyclerViewAdapter.OnRecipeStepC
         steps_rv!!.adapter = mStepsListAdapter!!
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_steps_list, container, false)
         unbinder = ButterKnife.bind(this, rootView)
@@ -86,7 +88,6 @@ class StepsListFragment : Fragment(), StepsListRecyclerViewAdapter.OnRecipeStepC
         } catch (e: ClassCastException) {
             throw ClassCastException(context!!.toString() + " must implement OnStepClickListener")
         }
-
     }
 
     override fun onDestroyView() {
@@ -106,5 +107,4 @@ class StepsListFragment : Fragment(), StepsListRecyclerViewAdapter.OnRecipeStepC
             return stepsListFragment
         }
     }
-
-}// Empty constructor
+} // Empty constructor
